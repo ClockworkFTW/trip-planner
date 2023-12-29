@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const { userId } = auth();
 
   if (!userId) {
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ trips: test }, { status: 200 });
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   const { userId } = auth();
 
   if (!userId) {
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Initialize storage
-  const { name } = await req.json();
+  const { name } = await request.json();
 
   const storage = {
     liveblocksType: "LiveObject",

@@ -6,7 +6,7 @@ const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY!,
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   const user = await currentUser();
 
   if (!user) {
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   const session = liveblocks.prepareSession(user.id, { userInfo });
 
-  const { room } = await req.json();
+  const { room } = await request.json();
   session.allow(room, session.FULL_ACCESS);
 
   const { body, status } = await session.authorize();

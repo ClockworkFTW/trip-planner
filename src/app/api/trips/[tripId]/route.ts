@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 
-export async function GET(req: NextRequest) {
+export async function GET(request: NextRequest) {
   const { userId } = auth();
 
   if (!userId) {
@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   }
 
   // TODO: find a better way to do this
-  const tripId = req.nextUrl.pathname.split("/")[3];
+  const tripId = request.nextUrl.pathname.split("/")[3];
 
   const trip = await prisma.trip.findUnique({ where: { id: tripId } });
 
