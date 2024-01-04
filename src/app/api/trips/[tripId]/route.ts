@@ -21,7 +21,10 @@ export async function GET(request: NextRequest) {
 
   const storage = await getStorage(tripId);
 
-  return NextResponse.json({ trip: { ...trip, storage } }, { status: 200 });
+  return NextResponse.json(
+    { trip: { ...trip, ...storage.trip } },
+    { status: 200 },
+  );
 }
 
 export async function DELETE(request: NextRequest) {

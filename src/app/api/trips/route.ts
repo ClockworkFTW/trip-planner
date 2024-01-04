@@ -15,7 +15,7 @@ export async function GET() {
   const test = await Promise.all(
     trips.map(async (trip) => {
       const storage = await getStorage(trip.id);
-      return { ...trip, storage };
+      return { ...trip, ...storage.trip };
     }),
   );
 
@@ -35,7 +35,16 @@ export async function POST() {
 
   await createRoom(tripId, ["room:write"]);
 
-  await initializeStorage(tripId, { name: "New Trip" });
+  const storage = {
+    trip: {
+      liveblocksType: "LiveObject",
+      data: {
+        name: "New Trip",
+      },
+    },
+  };
+
+  await initializeStorage(tripId, storage);
 
   return NextResponse.json({ tripId }, { status: 200 });
 }

@@ -42,7 +42,7 @@ export default function Trips() {
       </button>
       {trips.map((trip) => (
         <div key={trip.id}>
-          <Link href={`/trips/${trip.id}/edit`}>{trip.storage.name}</Link>
+          <Link href={`/trips/${trip.id}/edit`}>{trip.name}</Link>
         </div>
       ))}
     </div>
