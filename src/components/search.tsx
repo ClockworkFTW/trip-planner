@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import type { PlaceAutocompletePrediction } from "@/lib/types";
 
-type SearchProps = {};
+type SearchProps = {
+  types: string;
+  setPlaceId: (placeId: string) => void;
+};
 
-export default function Search({}: SearchProps) {
+export default function Search({ types, setPlaceId }: SearchProps) {
   const [input, setInput] = useState<string>("");
   const debouncedInput = useDebounce<string>(input, 500);
 
@@ -19,7 +22,7 @@ export default function Search({}: SearchProps) {
   );
 
   async function searchPlaces() {
-    const url = `/api/places?input=${debouncedInput}`;
+    const url = `/api/places?input=${debouncedInput}&types=${types}`;
     const response = await fetch(url, { method: "GET" });
     const data: { predictions: PlaceAutocompletePrediction[] } =
       await response.json();
@@ -34,9 +37,10 @@ export default function Search({}: SearchProps) {
     }
   }, [debouncedInput]);
 
-  function onPredictionClick(prediction: PlaceAutocompletePrediction) {
+  function handlePredictionClick(placeId: string) {
     setInput("");
     setPredictions([]);
+    setPlaceId(placeId);
   }
 
   return (
@@ -51,6 +55,10 @@ export default function Search({}: SearchProps) {
       {predictions.length !== 0 && (
         <ul className="mt-1 rounded border border-solid border-slate-300">
           {predictions.map((prediction, i) => {
+            const { place_id } = prediction;
+
+            if (!place_id) return null;
+
             const {
               main_text,
               main_text_matched_substrings,
@@ -61,7 +69,7 @@ export default function Search({}: SearchProps) {
             return (
               <li
                 key={i}
-                onClick={() => onPredictionClick(prediction)}
+                onClick={() => handlePredictionClick(place_id)}
                 className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-slate-100"
               >
                 <div>

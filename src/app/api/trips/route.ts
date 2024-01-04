@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 
@@ -30,7 +30,7 @@ export async function GET() {
   return NextResponse.json({ trips: test }, { status: 200 });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   const { userId } = auth();
 
   if (!userId) {
@@ -54,11 +54,9 @@ export async function POST(request: NextRequest) {
   });
 
   // Initialize storage
-  const { name } = await request.json();
-
   const storage = {
     liveblocksType: "LiveObject",
-    data: { name },
+    data: { name: "New Trip" },
   };
 
   await fetch(`https://api.liveblocks.io/v2/rooms/${tripId}/storage`, {
