@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
+import { getStorage, deleteRoom } from "@/lib/liveblocks";
 import prisma from "@/lib/db";
 
 export async function GET(request: NextRequest) {
@@ -18,19 +19,9 @@ export async function GET(request: NextRequest) {
     return new NextResponse("Not Found", { status: 404 });
   }
 
-  const result = await fetch(
-    `https://api.liveblocks.io/v2/rooms/${trip.id}/storage?format=json`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.LIVEBLOCKS_SECRET_KEY}`,
-      },
-    },
-  );
+  const storage = await getStorage(tripId);
 
-  const data = await result.json();
-
-  return NextResponse.json({ trip: { ...trip, data } }, { status: 200 });
+  return NextResponse.json({ trip: { ...trip, storage } }, { status: 200 });
 }
 
 export async function DELETE(request: NextRequest) {
@@ -51,12 +42,7 @@ export async function DELETE(request: NextRequest) {
 
   await prisma.trip.delete({ where: { id: tripId } });
 
-  await fetch(`https://api.liveblocks.io/v2/rooms/${tripId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${process.env.LIVEBLOCKS_SECRET_KEY}`,
-    },
-  });
+  await deleteRoom(tripId);
 
   return NextResponse.json({ message: "Trip deleted" }, { status: 200 });
 }

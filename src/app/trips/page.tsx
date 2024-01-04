@@ -15,6 +15,10 @@ export default function Trips() {
     setTrips(trips);
   }
 
+  useEffect(() => {
+    getTrips();
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
 
   async function createTrip() {
@@ -30,10 +34,6 @@ export default function Trips() {
     }
   }
 
-  useEffect(() => {
-    getTrips();
-  }, []);
-
   return (
     <div>
       <h1>Trips</h1>
@@ -42,7 +42,7 @@ export default function Trips() {
       </button>
       {trips.map((trip) => (
         <div key={trip.id}>
-          <Link href={`/trips/${trip.id}/edit`}>{trip.data.name}</Link>
+          <Link href={`/trips/${trip.id}/edit`}>{trip.storage.name}</Link>
         </div>
       ))}
     </div>

@@ -25,10 +25,10 @@ export default function EditTrip({ params }: Props) {
 
   return (
     <Room id={params.tripId}>
+      <h1>Edit Trip</h1>
       <button onClick={deleteTrip}>
         {isLoading ? "Deleting Trip..." : "Delete Trip"}
       </button>
-      <h1>Edit Trip</h1>
     </Room>
   );
 }
