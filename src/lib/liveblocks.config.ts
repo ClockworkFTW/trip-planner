@@ -12,9 +12,15 @@ type Storage = {
     name: string;
     places: LiveList<
       LiveObject<{
-        placeId: string;
+        id: string;
         cost: number;
         notes: string;
+        votes: LiveList<
+          LiveObject<{
+            userId: string;
+            value: number;
+          }>
+        >;
       }>
     >;
   }>;

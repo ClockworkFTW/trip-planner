@@ -10,7 +10,8 @@ export async function GET() {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const trips = await prisma.trip.findMany({ where: { userId } });
+  // TODO: get only trips where user is an owner or member
+  const trips = await prisma.trip.findMany();
 
   const test = await Promise.all(
     trips.map(async (trip) => {

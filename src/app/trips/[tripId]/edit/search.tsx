@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
+import { useMutation } from "@/lib/liveblocks.config";
+import { LiveList, LiveObject } from "@liveblocks/client";
 import type { PlaceAutocompletePrediction } from "@/lib/types";
 
-type SearchProps = {
-  types: string;
-  onPredictionClick: (placeId: string) => void;
-};
+export default function Search() {
+  const types = "(regions)";
 
-export default function Search({ types, onPredictionClick }: SearchProps) {
   const [input, setInput] = useState<string>("");
   const debouncedInput = useDebounce<string>(input, 500);
 
@@ -37,16 +36,23 @@ export default function Search({ types, onPredictionClick }: SearchProps) {
     }
   }, [debouncedInput]);
 
-  function handlePredictionClick(placeId: string) {
-    setInput("");
+  const handleAddPlace = useMutation(({ storage }, id: string) => {
+    const places = storage.get("trip").get("places");
+    const place = new LiveObject({
+      id,
+      cost: 0,
+      notes: "",
+      votes: new LiveList([]),
+    });
+    places.push(place);
     setPredictions([]);
-    onPredictionClick(placeId);
-  }
+    setInput("");
+  }, []);
 
   return (
     <div>
       <input
-        className="w-full rounded border border-solid border-slate-300 p-2"
+        className="w-full rounded-md border border-solid border-slate-300 p-2"
         type="text"
         placeholder="Search Places"
         value={input}
@@ -69,7 +75,7 @@ export default function Search({ types, onPredictionClick }: SearchProps) {
             return (
               <li
                 key={i}
-                onClick={() => handlePredictionClick(place_id)}
+                onClick={() => handleAddPlace(place_id)}
                 className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-slate-100"
               >
                 <div>
