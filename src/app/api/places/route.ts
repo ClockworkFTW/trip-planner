@@ -1,16 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { placeAutocomplete } from "@/lib/google";
-import { getErrorMessage } from "@/lib/util";
+import { getErrorMessage, getSearchParams } from "@/lib/util";
+import { z } from "zod";
+
+const paramsSchema = z.object({
+  input: z.string(),
+  types: z.string(),
+});
 
 export async function GET(request: NextRequest) {
-  const input = request.nextUrl.searchParams.get("input");
+  const params = getSearchParams(request);
 
-  if (!input) {
-    return NextResponse.json({ message: "Input required" }, { status: 400 });
+  const parsedParams = paramsSchema.safeParse(params);
+
+  if (!parsedParams.success) {
+    return NextResponse.json({ message: "Invalid params" }, { status: 400 });
   }
 
+  const { input, types } = parsedParams.data;
+
   try {
-    const { status, predictions } = await placeAutocomplete(input);
+    const { status, predictions } = await placeAutocomplete(input, types);
 
     if (status !== "OK") {
       return NextResponse.json({ message: "No places found" }, { status: 400 });

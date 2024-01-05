@@ -40,6 +40,10 @@ export async function POST() {
       liveblocksType: "LiveObject",
       data: {
         name: "New Trip",
+        places: {
+          liveblocksType: "LiveList",
+          data: [],
+        },
       },
     },
   };

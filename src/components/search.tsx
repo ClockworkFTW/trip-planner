@@ -6,10 +6,10 @@ import type { PlaceAutocompletePrediction } from "@/lib/types";
 
 type SearchProps = {
   types: string;
-  setPlaceId: (placeId: string) => void;
+  onPredictionClick: (placeId: string) => void;
 };
 
-export default function Search({ types, setPlaceId }: SearchProps) {
+export default function Search({ types, onPredictionClick }: SearchProps) {
   const [input, setInput] = useState<string>("");
   const debouncedInput = useDebounce<string>(input, 500);
 
@@ -40,7 +40,7 @@ export default function Search({ types, setPlaceId }: SearchProps) {
   function handlePredictionClick(placeId: string) {
     setInput("");
     setPredictions([]);
-    setPlaceId(placeId);
+    onPredictionClick(placeId);
   }
 
   return (
@@ -112,7 +112,7 @@ function PredictionText({ text, substrings }: PredictionTextProps) {
     <span>
       {text.split("").map((char, i) => {
         if (i >= offset && i < offset + length) {
-          return <b>{char}</b>;
+          return <b key={i}>{char}</b>;
         } else {
           return char;
         }

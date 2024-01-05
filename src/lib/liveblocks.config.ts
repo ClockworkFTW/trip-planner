@@ -1,4 +1,4 @@
-import { createClient, LiveObject } from "@liveblocks/client";
+import { createClient, LiveList, LiveObject } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 const client = createClient({
@@ -10,6 +10,13 @@ type Presence = {};
 type Storage = {
   trip: LiveObject<{
     name: string;
+    places: LiveList<
+      LiveObject<{
+        placeId: string;
+        cost: number;
+        notes: string;
+      }>
+    >;
   }>;
 };
 

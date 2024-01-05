@@ -1,3 +1,5 @@
+import { NextRequest } from "next/server";
+
 export function getErrorMessage(error: unknown) {
   let message;
 
@@ -12,4 +14,10 @@ export function getErrorMessage(error: unknown) {
   }
 
   return message;
+}
+
+export function getSearchParams(request: NextRequest) {
+  let data: { [key: string]: string } = {};
+  request.nextUrl.searchParams.forEach((value, key) => (data[key] = value));
+  return data;
 }

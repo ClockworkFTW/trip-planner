@@ -44,3 +44,30 @@ export const placesAutocompleteResponseSchema = z.object({
   predictions: z.array(placeAutocompletePredictionSchema),
   status: placesAutocompleteStatusSchema,
 });
+
+// Place
+
+export const localizedTextSchema = z.object({
+  text: z.string(),
+  languageCode: z.string(),
+});
+
+export const latLngSchema = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+});
+
+export const viewportSchema = z.object({
+  low: latLngSchema,
+  high: latLngSchema,
+});
+
+export const placeSchema = z.object({
+  id: z.string(),
+  displayName: localizedTextSchema,
+  formattedAddress: z.string(),
+  googleMapsUri: z.string(),
+  location: latLngSchema,
+  viewport: viewportSchema,
+  types: z.array(z.string()),
+});

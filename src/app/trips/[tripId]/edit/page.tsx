@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import Name from "./name";
 import Room from "./room";
+import Places from "./places";
 
 type Props = { params: { tripId: string } };
 
@@ -27,6 +29,7 @@ export default function EditTrip({ params }: Props) {
   return (
     <Room id={params.tripId}>
       <Name />
+      <Places />
       <button onClick={deleteTrip}>
         {isLoading ? "Deleting Trip..." : "Delete Trip"}
       </button>
