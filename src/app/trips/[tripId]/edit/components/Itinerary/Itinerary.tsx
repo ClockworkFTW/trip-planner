@@ -3,8 +3,10 @@
 import { memo } from "react";
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
+import { useMyPresence } from "@/lib/liveblocks.config";
 import { useUser } from "@clerk/nextjs";
 import { usePlace } from "@/lib/hooks";
+import clsx from "clsx";
 
 import {
   DndContext,
@@ -113,8 +115,22 @@ const MemoizedItem = memo(Item);
 function Item({ itemId, placeId, order }: ItemProps) {
   const { place } = usePlace(placeId);
 
+  const [presence, updatePresence] = useMyPresence();
+
+  const isActiveItem = presence.activeItemId === itemId;
+
+  function setActiveItemId() {
+    updatePresence({ activeItemId: itemId });
+  }
+
   return place ? (
-    <div className="m-2 flex rounded-md bg-slate-100 p-2">
+    <div
+      onClick={setActiveItemId}
+      className={clsx(
+        "m-2 flex rounded-md bg-slate-100 p-2",
+        isActiveItem && "outline outline-2 outline-red-600",
+      )}
+    >
       <div className="mr-4 flex-none">{order}</div>
       <div className="flex flex-auto gap-4">
         <span className="font-bold">{place.displayName.text}</span>

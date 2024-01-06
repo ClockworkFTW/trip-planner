@@ -5,7 +5,9 @@ const client = createClient({
   authEndpoint: "/api/trips/auth",
 });
 
-type Presence = {};
+type Presence = {
+  activeItemId: string | null;
+};
 
 type Storage = {
   trip: LiveObject<{

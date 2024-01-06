@@ -1,4 +1,5 @@
 import useSWRImmutable from "swr/immutable";
+import { useStorage } from "./liveblocks.config";
 import type { Place } from "./types";
 
 async function getPlace(url: string) {
@@ -7,8 +8,19 @@ async function getPlace(url: string) {
   return place;
 }
 
-export function usePlace(placeId: string) {
+export function usePlace(placeId?: string | null) {
   const url = `/api/places/${placeId}`;
-  const { data, error, isLoading } = useSWRImmutable(url, getPlace);
+
+  const { data, error, isLoading } = useSWRImmutable(
+    placeId ? url : null,
+    getPlace,
+  );
+
   return { place: data, isLoading, isError: error };
+}
+
+export function useItem(itemId?: string | null) {
+  return useStorage(({ trip }) =>
+    trip.itinerary.find((item) => item.itemId === itemId),
+  );
 }
