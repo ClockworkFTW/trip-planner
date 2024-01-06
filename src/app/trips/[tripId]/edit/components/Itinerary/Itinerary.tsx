@@ -5,7 +5,7 @@ import { useStorage, useMutation } from "@/lib/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
 import { useMyPresence } from "@/lib/liveblocks.config";
 import { useUser } from "@clerk/nextjs";
-import { usePlace } from "@/lib/hooks";
+import { usePlace } from "@/hooks/usePlace";
 import clsx from "clsx";
 
 import {

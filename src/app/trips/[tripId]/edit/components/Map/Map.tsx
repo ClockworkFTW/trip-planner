@@ -8,7 +8,8 @@ import {
 
 import { useSelf } from "@/lib/liveblocks.config";
 import { useStorage } from "@/lib/liveblocks.config";
-import { usePlace, useItem } from "@/lib/hooks";
+import { useItem } from "@/hooks/useItem";
+import { usePlace } from "@/hooks/usePlace";
 import clsx from "clsx";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
