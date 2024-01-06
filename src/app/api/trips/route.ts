@@ -41,7 +41,7 @@ export async function POST() {
       liveblocksType: "LiveObject",
       data: {
         name: "New Trip",
-        places: {
+        itinerary: {
           liveblocksType: "LiveList",
           data: [],
         },

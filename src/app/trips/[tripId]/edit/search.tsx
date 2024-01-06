@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
+import { nanoid } from "nanoid";
 import { useMutation } from "@/lib/liveblocks.config";
 import { LiveList, LiveObject } from "@liveblocks/client";
 import type { PlaceAutocompletePrediction } from "@/lib/types";
@@ -36,15 +37,19 @@ export default function Search() {
     }
   }, [debouncedInput]);
 
-  const handleAddPlace = useMutation(({ storage }, id: string) => {
-    const places = storage.get("trip").get("places");
-    const place = new LiveObject({
-      id,
+  const addPlaceToItinerary = useMutation(({ storage }, placeId: string) => {
+    const items = storage.get("trip").get("itinerary");
+
+    const item = new LiveObject({
+      itemId: nanoid(),
+      placeId,
       cost: 0,
       notes: "",
       votes: new LiveList([]),
     });
-    places.push(place);
+
+    items.push(item);
+
     setPredictions([]);
     setInput("");
   }, []);
@@ -75,7 +80,7 @@ export default function Search() {
             return (
               <li
                 key={i}
-                onClick={() => handleAddPlace(place_id)}
+                onClick={() => addPlaceToItinerary(place_id)}
                 className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-slate-100"
               >
                 <div>

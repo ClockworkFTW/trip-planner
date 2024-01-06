@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Name from "./name";
 import Room from "./room";
 import Search from "./search";
-import Places from "./places";
+import Itinerary from "./itinerary";
 
 type Props = { params: { tripId: string } };
 
@@ -31,7 +31,7 @@ export default function EditTrip({ params }: Props) {
     <Room id={params.tripId}>
       <Name />
       <Search />
-      <Places />
+      <Itinerary />
       <button onClick={deleteTrip}>
         {isLoading ? "Deleting Trip..." : "Delete Trip"}
       </button>

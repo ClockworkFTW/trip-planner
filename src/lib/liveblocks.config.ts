@@ -10,9 +10,10 @@ type Presence = {};
 type Storage = {
   trip: LiveObject<{
     name: string;
-    places: LiveList<
+    itinerary: LiveList<
       LiveObject<{
-        id: string;
+        itemId: string;
+        placeId: string;
         cost: number;
         notes: string;
         votes: LiveList<
