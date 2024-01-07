@@ -11,7 +11,21 @@ type Presence = {
 
 type Storage = {
   trip: LiveObject<{
-    name: string;
+    id: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    bounds: LiveObject<{
+      sw: LiveObject<{
+        lat: number;
+        lng: number;
+      }>;
+      ne: LiveObject<{
+        lat: number;
+        lng: number;
+      }>;
+    }>;
+
     itinerary: LiveList<
       LiveObject<{
         itemId: string;

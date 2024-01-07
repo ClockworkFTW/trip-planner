@@ -1,50 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTrips } from "@/hooks/useTrips";
 import Link from "next/link";
 
-export default function Trips() {
-  const router = useRouter();
-
-  const [trips, setTrips] = useState<any[]>([]);
-
-  async function getTrips() {
-    const res = await fetch("/api/trips", { method: "GET" });
-    const { trips } = await res.json();
-    setTrips(trips);
-  }
-
-  useEffect(() => {
-    getTrips();
-  }, []);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  async function createTrip() {
-    try {
-      setIsLoading(true);
-      const res = await fetch("/api/trips", { method: "POST" });
-      const { tripId } = await res.json();
-      router.push(`/trips/${tripId}/edit`);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+export default function TripList() {
+  const { trips, isLoading } = useTrips();
 
   return (
     <div>
-      <h1>Trips</h1>
-      <button onClick={createTrip}>
-        {isLoading ? "Creating Trip..." : "Create Trip"}
-      </button>
-      {trips.map((trip) => (
-        <div key={trip.id}>
-          <Link href={`/trips/${trip.id}/edit`}>{trip.name}</Link>
-        </div>
-      ))}
+      <h1>Trip List</h1>
+      <Link href="/trips/create">Create Trip</Link>
+      {isLoading && <p>Loading Trips...</p>}
+      <ul>
+        {trips?.map((trip) => (
+          <li key={trip.id}>
+            <Link href={`/trips/${trip.id}/edit`}>{trip.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

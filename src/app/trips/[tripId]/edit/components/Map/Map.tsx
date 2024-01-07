@@ -1,47 +1,44 @@
 "use client";
 
-import { APIProvider, Map as MapContainer } from "@vis.gl/react-google-maps";
-import { useSelf } from "@/lib/liveblocks.config";
+import { useEffect, useState } from "react";
+import { APIProvider, Map, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useStorage } from "@/lib/liveblocks.config";
-import { useItem } from "@/hooks/useItem";
-import { usePlace } from "@/hooks/usePlace";
-import Marker from "./Marker";
+import Markers from "./Markers";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
-export default function Map() {
-  const position = {
-    lat: 37.7749295,
-    lng: -122.41941550000001,
-  };
-
-  const itinerary = useStorage(({ trip }) => trip.itinerary);
-
-  const user = useSelf();
-
-  const activeItem = useItem(user.presence.activeItemId);
-
-  const { place: activePlace } = usePlace(activeItem?.placeId);
-
-  const activePosition = activePlace
-    ? {
-        lat: activePlace?.location.latitude,
-        lng: activePlace?.location.longitude,
-      }
-    : null;
-
+export default function MapContainer() {
   return (
     <APIProvider apiKey={API_KEY}>
-      <MapContainer center={activePosition || position} zoom={3} mapId={"1"}>
-        {itinerary.map(({ itemId, placeId }, index) => (
-          <Marker
-            key={itemId}
-            placeId={placeId}
-            order={index + 1}
-            isActive={activeItem?.itemId === itemId}
-          />
-        ))}
-      </MapContainer>
+      <MapContent />
     </APIProvider>
   );
+}
+
+function MapContent() {
+  const coreLib = useMapsLibrary("core");
+
+  const bounds = useStorage(({ trip }) => trip.bounds);
+
+  const [initialBounds, setInitialBounds] =
+    useState<google.maps.LatLngBounds>();
+
+  useEffect(() => {
+    if (!coreLib) return;
+
+    const { LatLng, LatLngBounds } = coreLib;
+
+    const sw = new LatLng(bounds.sw.lat, bounds.sw.lng);
+    const ne = new LatLng(bounds.ne.lat, bounds.ne.lng);
+
+    const initialBounds = new LatLngBounds(sw, ne);
+
+    setInitialBounds(initialBounds);
+  }, [coreLib]);
+
+  return initialBounds ? (
+    <Map initialBounds={initialBounds} mapId={"1"}>
+      <Markers />
+    </Map>
+  ) : null;
 }

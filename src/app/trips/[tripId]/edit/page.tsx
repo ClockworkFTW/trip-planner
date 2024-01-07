@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Map from "./components/Map";
-import Name from "./components/Name";
+import Title from "./components/Title";
 import Room from "./components/Room";
 import Search from "./components/Search";
 import Itinerary from "./components/Itinerary";
@@ -30,7 +30,7 @@ export default function EditTrip({ params }: Props) {
 
   return (
     <Room id={params.tripId}>
-      <Name />
+      <Title />
       <Search />
       <Itinerary />
       <div className="h-96 w-full">
