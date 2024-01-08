@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDebounce } from "usehooks-ts";
-import { useSearch } from "@/hooks/useSearch";
+import { usePredictions } from "@/hooks/usePredictions";
 import Predictions from "./Predictions";
 
 type SearchProps = { types: string; onClick: (placeId: string) => void };
@@ -11,10 +11,10 @@ export default function Search({ types, onClick }: SearchProps) {
   const [input, setInput] = useState<string>("");
   const debouncedInput = useDebounce<string>(input, 500);
 
-  const { predictions } = useSearch({
+  const { data: predictions } = usePredictions({
     input: debouncedInput,
     types,
-    reset: input === "",
+    reset: !input,
   });
 
   function handleClick(placeId: string) {

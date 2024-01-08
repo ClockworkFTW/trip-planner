@@ -1,4 +1,4 @@
-import useSWRMutation from "swr/mutation";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 type Trip = {
@@ -7,11 +7,10 @@ type Trip = {
   endDate: string;
 };
 
-async function createTrip(url: string, { arg }: { arg: Trip }) {
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-  });
+async function createTrip(trip: Trip) {
+  const url = `/api/trips`;
+  const body = JSON.stringify(trip);
+  const response = await fetch(url, { method: "POST", body });
   const { tripId }: { tripId: string } = await response.json();
   return tripId;
 }
@@ -19,13 +18,10 @@ async function createTrip(url: string, { arg }: { arg: Trip }) {
 export function useCreateTrip() {
   const router = useRouter();
 
-  const url = `/api/trips`;
-
-  const { trigger, error, isMutating } = useSWRMutation(url, createTrip, {
+  return useMutation({
+    mutationFn: (trip: Trip) => createTrip(trip),
     onSuccess: (tripId) => {
       router.push(`/trips/${tripId}/edit`);
     },
   });
-
-  return { createTrip: trigger, isLoading: isMutating, isError: error };
 }

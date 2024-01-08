@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { APIProvider, Map, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useStorage } from "@/lib/liveblocks.config";
 import Markers from "./Markers";
+import Bounds from "./Bounds";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
@@ -28,8 +29,8 @@ function MapContent() {
 
     const { LatLng, LatLngBounds } = coreLib;
 
-    const sw = new LatLng(bounds.sw.lat, bounds.sw.lng);
-    const ne = new LatLng(bounds.ne.lat, bounds.ne.lng);
+    const sw = new LatLng(bounds.sw.latitude, bounds.sw.longitude);
+    const ne = new LatLng(bounds.ne.latitude, bounds.ne.longitude);
 
     const initialBounds = new LatLngBounds(sw, ne);
 
@@ -39,6 +40,7 @@ function MapContent() {
   return initialBounds ? (
     <Map initialBounds={initialBounds} mapId={"1"}>
       <Markers />
+      <Bounds />
     </Map>
   ) : null;
 }

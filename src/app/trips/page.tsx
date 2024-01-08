@@ -4,7 +4,7 @@ import { useTrips } from "@/hooks/useTrips";
 import Link from "next/link";
 
 export default function TripList() {
-  const { trips, isLoading } = useTrips();
+  const { data: trips, isLoading } = useTrips();
 
   return (
     <div>

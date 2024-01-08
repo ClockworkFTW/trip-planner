@@ -17,12 +17,12 @@ type Storage = {
     endDate: string;
     bounds: LiveObject<{
       sw: LiveObject<{
-        lat: number;
-        lng: number;
+        latitude: number;
+        longitude: number;
       }>;
       ne: LiveObject<{
-        lat: number;
-        lng: number;
+        latitude: number;
+        longitude: number;
       }>;
     }>;
 

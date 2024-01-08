@@ -1,7 +1,15 @@
 import { z } from "zod";
 
-import { placeAutocompletePredictionSchema, placeSchema } from "@/lib/schemas";
+import {
+  placeAutocompletePredictionSchema,
+  placeSchema,
+  latLngSchema,
+} from "@/lib/schemas";
 
 export type Prediction = z.infer<typeof placeAutocompletePredictionSchema>;
 
 export type Place = z.infer<typeof placeSchema>;
+
+export type Location = z.infer<typeof latLngSchema>;
+
+export type Bounds = { sw: Location; ne: Location };

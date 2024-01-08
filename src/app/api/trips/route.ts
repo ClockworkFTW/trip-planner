@@ -4,7 +4,8 @@ import { createRoom, initializeStorage, getStorage } from "@/lib/liveblocks";
 import prisma from "@/lib/db";
 import { z } from "zod";
 import { placeDetails } from "@/lib/google";
-import { getBoundingBox } from "@/lib/util";
+import { getBounds } from "@/lib/util";
+import type { Bounds } from "@/lib/types";
 
 export async function GET() {
   const { userId } = auth();
@@ -62,7 +63,13 @@ export async function POST(request: NextRequest) {
   const title =
     "Trip to " + places.map((place) => place.displayName.text).join(" and ");
 
-  const boundingBox = getBoundingBox(places.map((place) => place.location));
+  let bounds: Bounds;
+
+  if (places.length === 1) {
+    bounds = { sw: places[0].viewport.low, ne: places[0].viewport.high };
+  } else {
+    bounds = getBounds(places.map((place) => place.location));
+  }
 
   const storage = {
     trip: {
@@ -76,11 +83,11 @@ export async function POST(request: NextRequest) {
           data: {
             sw: {
               liveblocksType: "LiveObject",
-              data: boundingBox.sw,
+              data: bounds.sw,
             },
             ne: {
               liveblocksType: "LiveObject",
-              data: boundingBox.ne,
+              data: bounds.ne,
             },
           },
         },

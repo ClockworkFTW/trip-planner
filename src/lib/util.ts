@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import type { Location } from "./types";
 
 export function getErrorMessage(error: unknown) {
   let message;
@@ -22,9 +23,7 @@ export function getSearchParams(request: NextRequest) {
   return data;
 }
 
-type Location = { latitude: number; longitude: number };
-
-export function getBoundingBox(locations: Location[]) {
+export function getBounds(locations: Location[]) {
   if (locations.length === 0) {
     throw new Error("Input array is empty");
   }
@@ -41,8 +40,8 @@ export function getBoundingBox(locations: Location[]) {
     maxLng = Math.max(maxLng, location.longitude);
   }
 
-  const sw = { lat: minLat, lng: minLng };
-  const ne = { lat: maxLat, lng: maxLng };
+  const sw = { latitude: minLat, longitude: minLng };
+  const ne = { latitude: maxLat, longitude: maxLng };
 
   return { sw, ne };
 }

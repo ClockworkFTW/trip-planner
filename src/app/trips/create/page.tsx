@@ -7,7 +7,7 @@ import Search from "./components/Search";
 import Places from "./components/Places";
 
 export default function CreateTrip() {
-  const { createTrip, isLoading } = useCreateTrip();
+  const { mutate: createTrip, isPending } = useCreateTrip();
 
   const [placeIds, setPlaceIds] = useState<string[]>([]);
 
@@ -39,7 +39,7 @@ export default function CreateTrip() {
       <Search onClick={handleAddPlace} />
       <Places placeIds={placeIds} />
       <button onClick={handleCreateTrip}>
-        {isLoading ? "Creating Trip..." : "Create Trip"}
+        {isPending ? "Creating Trip..." : "Create Trip"}
       </button>
     </div>
   );

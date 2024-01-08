@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import { useQuery } from "@tanstack/react-query";
 
 type Trip = {
   id: string;
@@ -7,16 +7,16 @@ type Trip = {
   endDate: Date;
 };
 
-async function getTrips(url: string) {
+async function getTrips() {
+  const url = `/api/trips`;
   const response = await fetch(url, { method: "GET" });
   const { trips }: { trips: Trip[] } = await response.json();
   return trips;
 }
 
 export function useTrips() {
-  const url = `/api/trips`;
-
-  const { data, error, isLoading } = useSWR(url, getTrips);
-
-  return { trips: data, isLoading, isError: error };
+  return useQuery({
+    queryKey: ["trip"],
+    queryFn: getTrips,
+  });
 }

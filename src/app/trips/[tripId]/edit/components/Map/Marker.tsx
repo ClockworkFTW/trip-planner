@@ -14,7 +14,7 @@ type MarkerProps = {
 };
 
 export default function Marker({ placeId, order }: MarkerProps) {
-  const { place } = usePlace(placeId);
+  const { data: place } = usePlace(placeId);
 
   if (!place) return null;
 

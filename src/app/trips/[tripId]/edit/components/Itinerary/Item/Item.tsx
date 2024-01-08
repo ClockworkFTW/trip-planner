@@ -34,7 +34,7 @@ const MemoizedItem = memo(Item);
 // ? Item always renders three times on mount
 
 function Item({ itemId, placeId, order }: ItemProps) {
-  const { place } = usePlace(placeId);
+  const { data: place } = usePlace(placeId);
 
   const [presence, updatePresence] = useMyPresence();
 
