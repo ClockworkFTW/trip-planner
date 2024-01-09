@@ -25,7 +25,7 @@ export default function Search({ types, onClick }: SearchProps) {
   return (
     <div>
       <input
-        className="w-full rounded-md border border-solid border-slate-300 p-2"
+        className="w-full rounded-md border border-solid border-gray-300 p-2"
         type="text"
         placeholder="Search Places"
         value={input}

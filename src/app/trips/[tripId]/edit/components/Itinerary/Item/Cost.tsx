@@ -17,11 +17,12 @@ export default function Cost({ itemId }: CostProps) {
 
   return (
     <label>
-      Cost:{" "}
+      <span>$ </span>
       <input
         type="number"
         value={cost}
         onChange={(e) => updateCost(e.target.value)}
+        className="w-[100px] rounded-lg"
       />
     </label>
   );

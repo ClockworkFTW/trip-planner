@@ -1,8 +1,11 @@
 "use client";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/pro-regular-svg-icons";
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
 import { useUser } from "@clerk/nextjs";
+import clsx from "clsx";
 
 type VoteProps = { itemId: string };
 
@@ -37,20 +40,28 @@ export default function Vote({ itemId }: VoteProps) {
   }, []);
 
   return (
-    <>
-      <span>Votes: {voteCount || 0}</span>
+    <div>
       <button
         onClick={() => updateVotes(1)}
         disabled={hasVoted && hasVoted.value === 1}
+        className={clsx(
+          "rounded-lg px-2 py-1",
+          hasVoted?.value === 1 && "bg-green-300",
+        )}
       >
-        up
+        <FontAwesomeIcon icon={faThumbsUp} />
       </button>
+      <span className="mx-1">{voteCount || 0}</span>
       <button
         onClick={() => updateVotes(-1)}
         disabled={hasVoted && hasVoted.value === -1}
+        className={clsx(
+          "rounded-lg px-2 py-1",
+          hasVoted?.value === -1 && "bg-red-300",
+        )}
       >
-        down
+        <FontAwesomeIcon icon={faThumbsDown} />
       </button>
-    </>
+    </div>
   );
 }

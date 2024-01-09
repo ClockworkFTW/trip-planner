@@ -12,13 +12,19 @@ type Props = { params: { tripId: string } };
 export default function EditTrip({ params }: Props) {
   return (
     <Room id={params.tripId}>
-      <Title />
-      <Search />
-      <Itinerary />
-      <div className="h-96 w-full">
-        <Map />
+      <div className="grid h-screen grid-cols-[55%_45%] gap-4">
+        <div>
+          <div className="m-3 flex justify-between">
+            <Title />
+            <Delete tripId={params.tripId} />
+          </div>
+          <Search />
+          <Itinerary />
+        </div>
+        <div className="h-full w-full">
+          <Map />
+        </div>
       </div>
-      <Delete tripId={params.tripId} />
     </Room>
   );
 }

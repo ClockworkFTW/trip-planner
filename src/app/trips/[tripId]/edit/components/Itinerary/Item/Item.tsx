@@ -1,15 +1,16 @@
 "use client";
 
 import { memo } from "react";
-import { useMyPresence } from "@/lib/liveblocks.config";
+import { useUpdateMyPresence } from "@/lib/liveblocks.config";
 import { usePlace } from "@/hooks/usePlace";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import Order from "./Order";
 import Note from "./Note";
 import Vote from "./Vote";
 import Cost from "./Cost";
+import Photo from "./Photo";
 import Delete from "./Delete";
-import clsx from "clsx";
 
 type ItemProps = { itemId: string; placeId: string; order: number };
 
@@ -18,7 +19,7 @@ export default function SortableItem({ itemId, placeId, order }: ItemProps) {
     useSortable({ id: itemId });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
   };
 
@@ -36,32 +37,28 @@ const MemoizedItem = memo(Item);
 function Item({ itemId, placeId, order }: ItemProps) {
   const { data: place } = usePlace(placeId);
 
-  const [presence, updatePresence] = useMyPresence();
-
-  const isActiveItem = presence.activeItemId === itemId;
+  const updateMyPresence = useUpdateMyPresence();
 
   function setActiveItemId() {
-    updatePresence({ activeItemId: itemId });
+    updateMyPresence({ activeItemId: itemId });
   }
 
   return place ? (
-    <div
-      onClick={setActiveItemId}
-      className={clsx(
-        "m-2 flex rounded-md bg-slate-100 p-2",
-        isActiveItem && "outline outline-2 outline-red-600",
-      )}
-    >
-      <div className="mr-4 flex-none">{order}</div>
-      <div className="flex flex-auto gap-4">
-        <span className="font-bold">{place.displayName.text}</span>
-        <Cost itemId={itemId} />
-        <Note itemId={itemId} />
-        <Vote itemId={itemId} />
+    <div onClick={setActiveItemId} className="m-4 flex justify-between gap-4">
+      <Order itemId={itemId} order={order} />
+      <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
+        <div className="flex justify-between">
+          <span className="font-bold">{place.displayName.text}</span>
+          <Delete itemId={itemId} />
+        </div>
+        <div className="my-1">{place.editorialSummary?.text}</div>
+        <div className="flex justify-between gap-3 align-bottom">
+          <Cost itemId={itemId} />
+          <Note itemId={itemId} />
+          <Vote itemId={itemId} />
+        </div>
       </div>
-      <div className="flex-none">
-        <Delete itemId={itemId} />
-      </div>
+      <Photo placeId={placeId} />
     </div>
   ) : null;
 }

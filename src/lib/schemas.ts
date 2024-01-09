@@ -62,12 +62,27 @@ export const viewportSchema = z.object({
   high: latLngSchema,
 });
 
+export const authorAttributionSchema = z.object({
+  displayName: z.string(),
+  uri: z.string(),
+  photoUri: z.string(),
+});
+
+export const photoSchema = z.object({
+  name: z.string(),
+  widthPx: z.number(),
+  heightPx: z.number(),
+  authorAttributions: z.array(authorAttributionSchema),
+});
+
 export const placeSchema = z.object({
   id: z.string(),
+  photos: z.array(photoSchema),
   displayName: localizedTextSchema,
   formattedAddress: z.string(),
   googleMapsUri: z.string(),
   location: latLngSchema,
   viewport: viewportSchema,
   types: z.array(z.string()),
+  editorialSummary: localizedTextSchema.optional(),
 });

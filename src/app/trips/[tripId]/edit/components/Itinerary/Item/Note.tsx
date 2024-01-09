@@ -17,11 +17,12 @@ export default function Note({ itemId }: NoteProps) {
 
   return (
     <label>
-      Note:{" "}
+      <span>Note: </span>
       <input
         type="text"
         value={notes}
         onChange={(e) => updateNotes(e.target.value)}
+        className="w-[100px] rounded-lg"
       />
     </label>
   );

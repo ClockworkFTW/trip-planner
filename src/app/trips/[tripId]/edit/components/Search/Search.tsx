@@ -20,5 +20,9 @@ export default function ItemSearch() {
     items.push(item);
   }, []);
 
-  return <Search types="(regions)" onClick={addPlaceToItinerary} />;
+  return (
+    <div className="m-3">
+      <Search types="all" onClick={addPlaceToItinerary} />
+    </div>
+  );
 }

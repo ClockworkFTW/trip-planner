@@ -11,7 +11,7 @@ type Props = {
 
 export default function Predictions({ predictions, onClick }: Props) {
   return (
-    <ul className="mt-1 rounded border border-solid border-slate-300">
+    <ul className="mt-1 rounded border border-solid border-gray-300">
       {predictions.map((prediction) => {
         const { place_id } = prediction;
 
@@ -28,7 +28,7 @@ export default function Predictions({ predictions, onClick }: Props) {
           <li
             key={place_id}
             onClick={() => onClick(place_id)}
-            className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-slate-100"
+            className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-gray-100"
           >
             <div>
               <h1>
@@ -37,7 +37,7 @@ export default function Predictions({ predictions, onClick }: Props) {
                   substrings={main_text_matched_substrings}
                 />
               </h1>
-              <p className="text-xs text-slate-700">
+              <p className="text-xs text-gray-700">
                 <Highlight
                   text={secondary_text}
                   substrings={secondary_text_matched_substrings}

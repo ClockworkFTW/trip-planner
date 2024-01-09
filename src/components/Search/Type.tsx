@@ -28,7 +28,7 @@ export default function Type({ types }: TypeProps) {
   }
 
   return (
-    <div className="rounded bg-slate-300 px-2 py-1 text-sm font-bold">
+    <div className="rounded bg-gray-300 px-2 py-1 text-sm font-bold">
       {content}
     </div>
   );
