@@ -6,7 +6,7 @@ import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { LiveObject } from "@liveblocks/client";
 import { getBounds } from "@/lib/util";
 import { usePlaces } from "@/hooks/usePlaces";
-import type { Place, Bounds } from "@/lib/types";
+import type { Place, Bounds } from "@/types/places";
 
 export default function Bounds() {
   const map = useMap();

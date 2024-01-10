@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Place } from "@/lib/types";
+import type { Place } from "@/types/places";
 
 async function getPlace(placeId: string) {
   const url = `/api/places/${placeId}`;

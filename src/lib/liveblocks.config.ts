@@ -30,6 +30,7 @@ type Storage = {
       LiveObject<{
         itemId: string;
         placeId: string;
+        travelMode: string;
         cost: number;
         notes: string;
         votes: LiveList<

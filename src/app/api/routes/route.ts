@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPlacePredictions } from "@/lib/google";
+import { getRoutes } from "@/lib/google";
 import { getErrorMessage, getSearchParams } from "@/lib/util";
 import { z } from "zod";
 
 const paramsSchema = z.object({
-  input: z.string(),
-  types: z.string(),
+  placeIdA: z.string(),
+  placeIdB: z.string(),
+  travelMode: z.string(),
 });
 
 export async function GET(request: NextRequest) {
@@ -17,16 +18,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: "Invalid params" }, { status: 400 });
   }
 
-  const { input, types } = parsedParams.data;
+  const { placeIdA, placeIdB, travelMode } = parsedParams.data;
 
   try {
-    const { status, predictions } = await getPlacePredictions(input, types);
-
-    if (status !== "OK") {
-      return NextResponse.json({ message: "No places found" }, { status: 400 });
-    }
-
-    return NextResponse.json({ predictions }, { status: 200 });
+    const routes = await getRoutes(placeIdA, placeIdB, travelMode);
+    return NextResponse.json(routes, { status: 200 });
   } catch (error) {
     const message = getErrorMessage(error);
     return NextResponse.json({ message }, { status: 400 });

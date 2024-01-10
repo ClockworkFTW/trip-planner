@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { placeDetails } from "@/lib/google";
+import { getPlaceDetails } from "@/lib/google";
 import { getErrorMessage } from "@/lib/util";
 
 export async function GET(request: NextRequest) {
@@ -7,8 +7,7 @@ export async function GET(request: NextRequest) {
   const placeId = request.nextUrl.pathname.split("/")[3];
 
   try {
-    const place = await placeDetails(placeId);
-
+    const place = await getPlaceDetails(placeId);
     return NextResponse.json({ place }, { status: 200 });
   } catch (error) {
     const message = getErrorMessage(error);

@@ -9,6 +9,7 @@ import Order from "./Order";
 import Note from "./Note";
 import Vote from "./Vote";
 import Cost from "./Cost";
+import Route from "./Route";
 import Photo from "./Photo";
 import Delete from "./Delete";
 
@@ -44,21 +45,25 @@ function Item({ itemId, placeId, order }: ItemProps) {
   }
 
   return place ? (
-    <div onClick={setActiveItemId} className="m-4 flex justify-between gap-4">
-      <Order itemId={itemId} order={order} />
-      <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
-        <div className="flex justify-between">
-          <span className="font-bold">{place.displayName.text}</span>
-          <Delete itemId={itemId} />
+    <>
+      <div onClick={setActiveItemId} className="m-4 flex justify-between gap-4">
+        <Order itemId={itemId} order={order} />
+        <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
+          <div className="flex justify-between">
+            <span className="font-bold">{place.displayName.text}</span>
+            <Delete itemId={itemId} />
+          </div>
+          <div className="my-1">{place.editorialSummary?.text}</div>
+
+          <div className="flex justify-between gap-3 align-bottom">
+            <Cost itemId={itemId} />
+            <Note itemId={itemId} />
+            <Vote itemId={itemId} />
+          </div>
         </div>
-        <div className="my-1">{place.editorialSummary?.text}</div>
-        <div className="flex justify-between gap-3 align-bottom">
-          <Cost itemId={itemId} />
-          <Note itemId={itemId} />
-          <Vote itemId={itemId} />
-        </div>
+        <Photo placeId={placeId} />
       </div>
-      <Photo placeId={placeId} />
-    </div>
+      <Route itemId={itemId} />
+    </>
   ) : null;
 }

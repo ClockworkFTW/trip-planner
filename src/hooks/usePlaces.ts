@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query";
 import { useStorage } from "@/lib/liveblocks.config";
-import type { Place } from "@/lib/types";
+import type { Place } from "@/types/places";
 
 async function getPlace(placeId: string) {
   const response = await fetch(`/api/places/${placeId}`, { method: "GET" });

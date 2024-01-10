@@ -12,6 +12,7 @@ export default function ItemSearch() {
     const item = new LiveObject({
       itemId: nanoid(),
       placeId,
+      travelMode: "DRIVE",
       cost: 0,
       notes: "",
       votes: new LiveList([]),

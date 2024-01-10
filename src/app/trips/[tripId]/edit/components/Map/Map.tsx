@@ -5,6 +5,7 @@ import { APIProvider, Map, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useStorage } from "@/lib/liveblocks.config";
 import Markers from "./Markers";
 import Bounds from "./Bounds";
+import Routes from "./Routes";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
@@ -41,6 +42,7 @@ function MapContent() {
     <Map initialBounds={initialBounds} mapId={"1"}>
       <Markers />
       <Bounds />
+      <Routes />
     </Map>
   ) : null;
 }

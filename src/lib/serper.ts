@@ -5,9 +5,7 @@ export async function getDescription(query: string) {
 
   const body = JSON.stringify({ q: query });
 
-  const headers = {
-    "X-API-KEY": API_KEY,
-  };
+  const headers = { "X-API-KEY": API_KEY };
 
   const response = await fetch(url, { method: "POST", headers, body });
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Prediction } from "@/lib/types";
+import type { Prediction } from "@/types/predictions";
 
 async function getPredictions(input: string, types: string) {
   const url = `/api/places?input=${input}&types=${types}`;
