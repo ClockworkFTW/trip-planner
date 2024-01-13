@@ -12,7 +12,7 @@ type Props = { params: { tripId: string } };
 export default function EditTrip({ params }: Props) {
   return (
     <Room id={params.tripId}>
-      <div className="grid h-screen grid-cols-[55%_45%] gap-4">
+      <div className="grid h-screen grid-cols-[55%_45%]">
         <div>
           <div className="m-3 flex justify-between">
             <Title />

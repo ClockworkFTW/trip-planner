@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import type { Location } from "./types";
+import type { Location } from "@/types/places";
 
 export function getErrorMessage(error: unknown) {
   let message;
@@ -44,4 +44,10 @@ export function getBounds(locations: Location[]) {
   const ne = { latitude: maxLat, longitude: maxLng };
 
   return { sw, ne };
+}
+
+export function metersToMiles(meters: number) {
+  const conversionRate = 0.000621371;
+  const miles = meters * conversionRate;
+  return Number(miles.toFixed(1));
 }

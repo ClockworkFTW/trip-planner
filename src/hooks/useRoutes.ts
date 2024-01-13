@@ -15,8 +15,6 @@ async function getRoutes({ placeIdA, placeIdB, travelMode }: GetRoutesArgs) {
   return routes;
 }
 
-// TODO: figure out why requests not being deduped
-
 export function useRoutes(itemId: string) {
   const itemIndex = useStorage(({ trip }) =>
     trip.itinerary.findIndex((item) => item.itemId === itemId),
@@ -37,6 +35,7 @@ export function useRoutes(itemId: string) {
   return useQuery({
     queryKey: ["routes", placeIdA, placeIdB, travelMode],
     queryFn: () => getRoutes({ placeIdA, placeIdB, travelMode }),
+    staleTime: 10 * 60 * 1000,
     enabled: !!placeIdB,
   });
 }

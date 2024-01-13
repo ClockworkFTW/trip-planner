@@ -14,6 +14,7 @@ export function usePredictions({ input, types, reset }: UsePredictionsArgs) {
   const { data, ...rest } = useQuery({
     queryKey: ["prediction", input, types],
     queryFn: () => getPredictions(input, types),
+    staleTime: 10 * 60 * 1000,
     enabled: !!input,
   });
 

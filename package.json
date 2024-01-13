@@ -25,6 +25,7 @@
     "@tanstack/react-query-next-experimental": "^5.17.9",
     "@vis.gl/react-google-maps": "^0.4.2",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
     "nanoid": "^5.0.4",
     "next": "14.0.4",
     "react": "^18",

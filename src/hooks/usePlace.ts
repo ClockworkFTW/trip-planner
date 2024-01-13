@@ -12,6 +12,7 @@ export function usePlace(placeId?: string | null) {
   return useQuery({
     queryKey: ["place", placeId],
     queryFn: () => getPlace(placeId!),
+    staleTime: 10 * 60 * 1000,
     enabled: !!placeId,
   });
 }

@@ -25,7 +25,6 @@ type Storage = {
         longitude: number;
       }>;
     }>;
-
     itinerary: LiveList<
       LiveObject<{
         itemId: string;

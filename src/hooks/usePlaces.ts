@@ -17,6 +17,7 @@ export function usePlaces() {
     queries: placeIds.map((placeId) => ({
       queryKey: ["place", placeId],
       queryFn: () => getPlace(placeId),
+      staleTime: 10 * 60 * 1000,
     })),
     combine: (results) => {
       return {

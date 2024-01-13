@@ -11,13 +11,13 @@ export default function Order({ itemId, order }: Props) {
   const isActiveItem = presence.activeItemId === itemId;
 
   return (
-    <div
+    <span
       className={clsx(
-        "rounded-lg p-2 font-bold",
-        isActiveItem && "bg-red-600  text-white",
+        "rounded-lg px-3 py-1 font-bold",
+        isActiveItem ? "bg-red-600  text-white" : "bg-gray-300 text-black",
       )}
     >
       {order}
-    </div>
+    </span>
   );
 }

@@ -46,11 +46,13 @@ function Item({ itemId, placeId, order }: ItemProps) {
 
   return place ? (
     <>
-      <div onClick={setActiveItemId} className="m-4 flex justify-between gap-4">
-        <Order itemId={itemId} order={order} />
+      <div onClick={setActiveItemId} className="m-4 flex gap-4">
         <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
           <div className="flex justify-between">
-            <span className="font-bold">{place.displayName.text}</span>
+            <div className="flex items-center gap-2">
+              <Order itemId={itemId} order={order} />
+              <span className="font-bold">{place.displayName.text}</span>
+            </div>
             <Delete itemId={itemId} />
           </div>
           <div className="my-1">{place.editorialSummary?.text}</div>

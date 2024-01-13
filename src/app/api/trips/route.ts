@@ -3,9 +3,9 @@ import { auth } from "@clerk/nextjs";
 import { createRoom, initializeStorage, getStorage } from "@/lib/liveblocks";
 import prisma from "@/lib/db";
 import { z } from "zod";
-import { placeDetails } from "@/lib/google";
+import { getPlaceDetails } from "@/lib/google";
 import { getBounds } from "@/lib/util";
-import type { Bounds } from "@/lib/types";
+import type { Bounds } from "@/types/places";
 
 export async function GET() {
   const { userId } = auth();
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
   const { placeIds, startDate, endDate } = parsedBody.data;
 
   const places = await Promise.all(
-    placeIds.map((placeId) => placeDetails(placeId)),
+    placeIds.map((placeId) => getPlaceDetails(placeId)),
   );
 
   const title =
