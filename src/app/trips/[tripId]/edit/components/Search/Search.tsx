@@ -21,9 +21,5 @@ export default function ItemSearch() {
     items.push(item);
   }, []);
 
-  return (
-    <div className="m-3">
-      <Search types="all" onClick={addPlaceToItinerary} />
-    </div>
-  );
+  return <Search types="all" onClick={addPlaceToItinerary} />;
 }

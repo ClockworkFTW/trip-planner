@@ -13,12 +13,14 @@ export default function EditTrip({ params }: Props) {
   return (
     <Room id={params.tripId}>
       <div className="grid h-screen grid-cols-[55%_45%]">
-        <div>
-          <div className="m-3 flex justify-between">
-            <Title />
-            <Delete tripId={params.tripId} />
+        <div className="relative overflow-y-scroll">
+          <div className="sticky top-0 z-10 bg-white p-3">
+            <div className="mb-3 flex justify-between">
+              <Title />
+              <Delete tripId={params.tripId} />
+            </div>
+            <Search />
           </div>
-          <Search />
           <Itinerary />
         </div>
         <div className="h-full w-full">

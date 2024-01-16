@@ -13,9 +13,13 @@ export default function Photo({ placeId }: Props) {
   const { data: place } = usePlace(placeId);
 
   const photos = place?.photos.map((photo) => {
-    const maxWidthPx = 600;
-    const maxHeighPx = 360;
-    return `https://places.googleapis.com/v1/${photo.name}/media?key=${API_KEY}&maxWidthPx=${maxWidthPx}&maxHeightPx=${maxHeighPx}`;
+    if (photo.name.startsWith("places")) {
+      const maxWidthPx = 600;
+      const maxHeighPx = 360;
+      return `https://places.googleapis.com/v1/${photo.name}/media?key=${API_KEY}&maxWidthPx=${maxWidthPx}&maxHeightPx=${maxHeighPx}`;
+    } else {
+      return photo.name;
+    }
   });
 
   const [index, setIndex] = useState(0);

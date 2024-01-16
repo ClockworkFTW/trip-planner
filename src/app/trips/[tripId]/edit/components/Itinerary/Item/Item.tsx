@@ -36,7 +36,7 @@ const MemoizedItem = memo(Item);
 // ? Item always renders three times on mount
 
 function Item({ itemId, placeId, order }: ItemProps) {
-  const { data: place } = usePlace(placeId);
+  const { data: place, isLoading } = usePlace(placeId);
 
   const updateMyPresence = useUpdateMyPresence();
 
@@ -44,28 +44,38 @@ function Item({ itemId, placeId, order }: ItemProps) {
     updateMyPresence({ activeItemId: itemId });
   }
 
-  return place ? (
-    <>
-      <div onClick={setActiveItemId} className="m-4 flex gap-4">
-        <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
-          <div className="flex justify-between">
-            <div className="flex items-center gap-2">
-              <Order itemId={itemId} order={order} />
-              <span className="font-bold">{place.displayName.text}</span>
-            </div>
-            <Delete itemId={itemId} />
-          </div>
-          <div className="my-1">{place.editorialSummary?.text}</div>
+  let content: JSX.Element | null = null;
 
-          <div className="flex justify-between gap-3 align-bottom">
-            <Cost itemId={itemId} />
-            <Note itemId={itemId} />
-            <Vote itemId={itemId} />
+  if (isLoading) {
+    content = <div>Loading...</div>;
+  }
+
+  if (place) {
+    content = (
+      <>
+        <div onClick={setActiveItemId} className="m-4 flex gap-4">
+          <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-200 p-3">
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2">
+                <Order itemId={itemId} order={order} />
+                <span className="font-bold">{place.displayName.text}</span>
+              </div>
+              <Delete itemId={itemId} />
+            </div>
+            <div className="my-1">{place.editorialSummary?.text}</div>
+
+            <div className="flex justify-between gap-3 align-bottom">
+              <Cost itemId={itemId} />
+              <Note itemId={itemId} />
+              <Vote itemId={itemId} />
+            </div>
           </div>
+          <Photo placeId={placeId} />
         </div>
-        <Photo placeId={placeId} />
-      </div>
-      <Route itemId={itemId} />
-    </>
-  ) : null;
+        <Route itemId={itemId} />
+      </>
+    );
+  }
+
+  return content;
 }
