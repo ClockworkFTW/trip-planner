@@ -15,7 +15,7 @@ export default function Photo({ placeId }: Props) {
   const photos = place?.photos.map((photo) => {
     if (photo.name.startsWith("places")) {
       const maxWidthPx = 600;
-      const maxHeighPx = 360;
+      const maxHeighPx = 600;
       return `https://places.googleapis.com/v1/${photo.name}/media?key=${API_KEY}&maxWidthPx=${maxWidthPx}&maxHeightPx=${maxHeighPx}`;
     } else {
       return photo.name;
@@ -51,7 +51,7 @@ export default function Photo({ placeId }: Props) {
   }
 
   return (
-    <div className="relative h-[120px] w-[200px] flex-none overflow-hidden rounded-lg">
+    <div className="relative h-[200px] w-[200px] flex-none overflow-hidden rounded-lg">
       {photos ? (
         <img src={photos[index]} className="h-full w-full object-cover" />
       ) : null}

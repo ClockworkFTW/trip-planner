@@ -28,6 +28,13 @@ export const photo = z.object({
   authorAttributions: z.array(authorAttribution),
 });
 
+export const addressComponent = z.object({
+  longText: z.string(),
+  shortText: z.string(),
+  types: z.array(z.string()),
+  languageCode: z.string(),
+});
+
 export const place = z.object({
   id: z.string(),
   photos: z.array(photo),
@@ -38,4 +45,5 @@ export const place = z.object({
   viewport: viewport,
   types: z.array(z.string()),
   editorialSummary: localizedText.optional(),
+  addressComponents: z.array(addressComponent),
 });

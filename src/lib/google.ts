@@ -29,6 +29,7 @@ export async function getPlaceDetails(placeId: string) {
     "photos",
     "displayName",
     "formattedAddress",
+    "addressComponents",
     "googleMapsUri",
     "location",
     "viewport",

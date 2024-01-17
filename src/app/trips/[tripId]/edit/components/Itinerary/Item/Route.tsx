@@ -24,7 +24,7 @@ export default function Route({ itemId }: Props) {
 
   if (isLoading) {
     content = (
-      <div className="ml-[100px] border-l-2 border-dashed pl-4">Loading...</div>
+      <div className="ml-[260px] border-l-2 border-dashed pl-4">Loading...</div>
     );
   }
 
@@ -48,7 +48,7 @@ export default function Route({ itemId }: Props) {
       .trimStart();
 
     content = (
-      <div className="ml-[100px] flex gap-4 border-l-2 border-dashed pl-4">
+      <div className="ml-[260px] flex gap-4 border-l-2 border-dashed pl-4">
         <TravelMode itemId={itemId} />
         <div>{time}</div>
         <div>{distance} miles</div>
