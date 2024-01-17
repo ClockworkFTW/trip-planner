@@ -12,7 +12,7 @@ export default function Bounds() {
   const map = useMap();
   const coreLib = useMapsLibrary("core");
 
-  const { data } = usePlaces();
+  const { data, pending } = usePlaces();
 
   // Filter out any places that could not be fetched
   const places = data.filter((data): data is Place => !!data);
@@ -23,7 +23,7 @@ export default function Bounds() {
   const triggerId = Array.from(new Set(placeIds)).sort().join("");
 
   useEffect(() => {
-    if (triggerId && map && coreLib) {
+    if (triggerId && map && coreLib && !pending) {
       let bounds: Bounds;
 
       if (places.length === 1) {
@@ -43,7 +43,7 @@ export default function Bounds() {
 
       updateBounds(bounds);
     }
-  }, [triggerId]);
+  }, [triggerId, pending]);
 
   const updateBounds = useMutation(({ storage }, { sw, ne }: Bounds) => {
     const bounds = new LiveObject({
