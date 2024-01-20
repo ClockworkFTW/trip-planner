@@ -46,4 +46,8 @@ export const place = z.object({
   types: z.array(z.string()),
   editorialSummary: localizedText.optional(),
   addressComponents: z.array(addressComponent),
+  rating: z.number().optional(),
+  userRatingCount: z.number().optional(),
+  websiteUri: z.string().optional(),
+  internationalPhoneNumber: z.string().optional(),
 });

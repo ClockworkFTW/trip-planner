@@ -7,12 +7,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Order from "./Order";
 import Flag from "./Flag";
-import Note from "./Note";
 import Vote from "./Vote";
-import Cost from "./Cost";
 import Route from "./Route";
 import Photo from "./Photo";
 import Delete from "./Delete";
+import Details from "./Details";
 
 type ItemProps = { itemId: string; placeId: string; order: number };
 
@@ -56,7 +55,7 @@ function Item({ itemId, placeId, order }: ItemProps) {
       <>
         <div onClick={setActiveItemId} className="m-4 flex gap-4 ">
           <Photo placeId={placeId} />
-          <div className="flex min-w-0 flex-auto flex-col justify-between rounded-lg bg-gray-100 p-3">
+          <div className="flex min-w-0 flex-auto flex-col justify-between gap-2 rounded-lg bg-gray-100 p-3">
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Order itemId={itemId} order={order} />
@@ -64,12 +63,9 @@ function Item({ itemId, placeId, order }: ItemProps) {
               </div>
               <Flag placeId={placeId} />
             </div>
-            <div className="my-1 text-gray-500">
-              {place.editorialSummary?.text}
-            </div>
+            <div className="text-gray-500">{place.editorialSummary?.text}</div>
+            <Details itemId={itemId} placeId={placeId} />
             <div className="flex justify-between gap-3 align-bottom">
-              {/* <Cost itemId={itemId} />
-              <Note itemId={itemId} /> */}
               <Vote itemId={itemId} />
               <Delete itemId={itemId} />
             </div>

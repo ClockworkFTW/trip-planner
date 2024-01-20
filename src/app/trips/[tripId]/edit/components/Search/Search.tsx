@@ -13,6 +13,7 @@ export default function ItemSearch() {
       itemId: nanoid(),
       placeId,
       travelMode: "DRIVE",
+      time: "",
       cost: 0,
       notes: "",
       votes: new LiveList([]),

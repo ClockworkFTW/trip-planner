@@ -16,14 +16,12 @@ export default function Note({ itemId }: NoteProps) {
   }, []);
 
   return (
-    <label>
-      <span>Note: </span>
-      <input
-        type="text"
-        value={notes}
-        onChange={(e) => updateNotes(e.target.value)}
-        className="w-[100px] rounded-lg"
-      />
-    </label>
+    <input
+      type="text"
+      value={notes}
+      placeholder="Notes..."
+      onChange={(e) => updateNotes(e.target.value)}
+      className="rounded-md bg-gray-200 px-3 py-2 text-gray-600"
+    />
   );
 }

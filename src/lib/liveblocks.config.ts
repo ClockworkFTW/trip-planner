@@ -30,6 +30,7 @@ type Storage = {
         itemId: string;
         placeId: string;
         travelMode: string;
+        time: string;
         cost: number;
         notes: string;
         votes: LiveList<

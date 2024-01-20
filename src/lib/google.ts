@@ -35,6 +35,10 @@ export async function getPlaceDetails(placeId: string) {
     "viewport",
     "types",
     "editorialSummary",
+    "rating",
+    "userRatingCount",
+    "websiteUri",
+    "internationalPhoneNumber",
   ].join(",");
 
   const url = `https://places.googleapis.com/v1/places/${placeId}?fields=${fields}&languageCode=en&key=${API_KEY}`;
