@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/pro-regular-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
 import { usePlace } from "@/hooks/usePlace";
 
@@ -51,22 +51,24 @@ export default function Photo({ placeId }: Props) {
   }
 
   return (
-    <div className="relative h-[200px] w-[200px] flex-none overflow-hidden rounded-lg">
+    <div className="relative h-[160px] w-[160px] flex-none overflow-hidden rounded-lg">
       {photos ? (
         <img src={photos[index]} className="h-full w-full object-cover" />
       ) : null}
-      <button
-        onClick={decrementIndex}
-        className="absolute left-2 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full bg-white"
-      >
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </button>
-      <button
-        onClick={incrementIndex}
-        className="absolute right-2 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full bg-white"
-      >
-        <FontAwesomeIcon icon={faAngleRight} />
-      </button>
+      <div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 justify-between opacity-0 hover:opacity-100">
+        <button
+          onClick={decrementIndex}
+          className="h-7 w-7 rounded-full bg-white"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </button>
+        <button
+          onClick={incrementIndex}
+          className="h-7 w-7 rounded-full bg-white"
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+      </div>
     </div>
   );
 }

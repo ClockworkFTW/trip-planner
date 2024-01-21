@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/pro-regular-svg-icons";
+import { faStar } from "@fortawesome/pro-solid-svg-icons";
 import { usePlace } from "@/hooks/usePlace";
 
 type Props = { placeId: string };
@@ -13,7 +13,7 @@ export default function Ratings({ placeId }: Props) {
   const ratingCount = place?.userRatingCount;
 
   return rating && ratingCount ? (
-    <div className="text-gray-600">
+    <div className="text-gray-600 hover:text-blue-600">
       <FontAwesomeIcon icon={faStar} />
       <span className="ml-2">
         {rating} ({ratingCount.toLocaleString()})

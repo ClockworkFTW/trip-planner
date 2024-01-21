@@ -58,12 +58,16 @@ function Item({ itemId, placeId, order }: ItemProps) {
           <div className="flex min-w-0 flex-auto flex-col justify-between gap-2 rounded-lg bg-gray-100 p-3">
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
-                <Order itemId={itemId} order={order} />
-                <span className="font-bold">{place.displayName.text}</span>
+                <Order order={order} />
+                <span className="font-bold text-gray-800">
+                  {place.displayName.text}
+                </span>
               </div>
               <Flag placeId={placeId} />
             </div>
-            <div className="text-gray-500">{place.editorialSummary?.text}</div>
+            <div className="text-sm text-gray-500">
+              {place.editorialSummary?.text}
+            </div>
             <Details itemId={itemId} placeId={placeId} />
             <div className="flex justify-between gap-3 align-bottom">
               <Vote itemId={itemId} />

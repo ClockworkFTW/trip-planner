@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/pro-regular-svg-icons";
+import { faPhone } from "@fortawesome/pro-solid-svg-icons";
 import { usePlace } from "@/hooks/usePlace";
 
 type Props = { placeId: string };
@@ -12,7 +12,7 @@ export default function Phone({ placeId }: Props) {
   const phone = place?.internationalPhoneNumber;
 
   return phone ? (
-    <div className="text-gray-600">
+    <div className="text-gray-600 hover:text-blue-600">
       <FontAwesomeIcon icon={faPhone} />
       <span className="ml-2">{phone}</span>
     </div>

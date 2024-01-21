@@ -21,7 +21,7 @@ export default function Note({ itemId }: NoteProps) {
       value={notes}
       placeholder="Notes..."
       onChange={(e) => updateNotes(e.target.value)}
-      className="rounded-md bg-gray-200 px-3 py-2 text-gray-600"
+      className="rounded-md bg-gray-200 px-3 py-2 text-sm text-gray-600"
     />
   );
 }

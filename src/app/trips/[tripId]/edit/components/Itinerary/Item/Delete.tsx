@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/pro-regular-svg-icons";
+import { faTrashCan } from "@fortawesome/pro-solid-svg-icons";
 import { useMutation } from "@/lib/liveblocks.config";
 
 type DeleteProps = { itemId: string };
@@ -14,7 +14,7 @@ export default function Delete({ itemId }: DeleteProps) {
   }, []);
 
   return (
-    <button onClick={deleteItem}>
+    <button className="text-gray-800" onClick={deleteItem}>
       <FontAwesomeIcon icon={faTrashCan} />
     </button>
   );

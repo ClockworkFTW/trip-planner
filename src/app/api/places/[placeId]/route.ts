@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPlaceDetails } from "@/lib/google";
-import {
-  getCachedDescription,
-  getCachedPhotos,
-  setCachedDescription,
-  setCachedPhotos,
-} from "@/lib/cache";
+import * as cache from "@/lib/cache";
 import { getDescription, getPhotos } from "@/lib/serper";
 import { getErrorMessage } from "@/lib/util";
-import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
   // TODO: find a better way to do this
@@ -18,8 +12,7 @@ export async function GET(request: NextRequest) {
     const place = await getPlaceDetails(placeId);
 
     if (!place.editorialSummary) {
-      noStore();
-      const cachedDescription = await getCachedDescription(placeId);
+      const cachedDescription = await cache.getDescription(placeId);
 
       if (cachedDescription) {
         place.editorialSummary = cachedDescription;
@@ -27,26 +20,21 @@ export async function GET(request: NextRequest) {
         const description = await getDescription(place.formattedAddress);
 
         if (description) {
-          await setCachedDescription(placeId, description);
+          await cache.setDescription(placeId, description);
           place.editorialSummary = description;
         }
       }
     }
 
-    noStore();
-    const cachedPhotos = await getCachedPhotos(placeId);
+    const cachedPhotos = await cache.getPhotos(placeId);
 
     if (cachedPhotos) {
       place.photos = [...cachedPhotos, ...place.photos];
     } else {
       const photos = await getPhotos(place.formattedAddress);
-      await setCachedPhotos(placeId, photos);
+      await cache.setPhotos(placeId, photos);
       place.photos = [...photos, ...place.photos];
     }
-
-    const photos = await getPhotos(place.formattedAddress);
-
-    place.photos = [...photos, ...place.photos];
 
     return NextResponse.json({ place }, { status: 200 });
   } catch (error) {

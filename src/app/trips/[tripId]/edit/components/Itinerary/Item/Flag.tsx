@@ -17,8 +17,8 @@ export default function Flag({ placeId }: Props) {
     }
   });
 
-  const width = 28;
-  const height = 21;
+  const width = 24;
+  const height = 18;
 
   const baseUrl = "https://flagcdn.com";
 
@@ -29,7 +29,7 @@ export default function Flag({ placeId }: Props) {
 
   return countryCode && countryName ? (
     <div className="flex items-center gap-2">
-      <div>{countryName}</div>
+      <span className="text-sm text-gray-800">{countryName}</span>
       <img
         className="flex-none self-center rounded"
         src={src}

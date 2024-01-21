@@ -1,23 +1,28 @@
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
 import type { Photo, LocalizedText } from "@/types/places";
 
-export async function getCachedDescription(placeId: string) {
+const redis = new Redis({
+  url: process.env.REDIS_URL!,
+  token: process.env.REDIS_TOKEN!,
+});
+
+export async function getDescription(placeId: string) {
   const key = `description:${placeId}`;
 
-  const response: LocalizedText | null = await kv.get(key);
+  const response: LocalizedText | null = await redis.get(key);
 
   return response;
 }
 
-export async function getCachedPhotos(placeId: string) {
+export async function getPhotos(placeId: string) {
   const key = `photos:${placeId}`;
 
-  const response: Photo[] | null = await kv.get(key);
+  const response: Photo[] | null = await redis.get(key);
 
   return response;
 }
 
-export async function setCachedDescription(
+export async function setDescription(
   placeId: string,
   description: LocalizedText,
 ) {
@@ -25,13 +30,13 @@ export async function setCachedDescription(
 
   const value = JSON.stringify(description);
 
-  await kv.set(key, value);
+  await redis.set(key, value);
 }
 
-export async function setCachedPhotos(placeId: string, photos: Photo[]) {
+export async function setPhotos(placeId: string, photos: Photo[]) {
   const key = `photos:${placeId}`;
 
   const value = JSON.stringify(photos);
 
-  await kv.set(key, value);
+  await redis.set(key, value);
 }

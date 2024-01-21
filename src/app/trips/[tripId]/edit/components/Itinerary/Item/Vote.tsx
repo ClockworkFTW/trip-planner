@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsDown, faThumbsUp } from "@fortawesome/pro-regular-svg-icons";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/pro-solid-svg-icons";
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
 import { useUser } from "@clerk/nextjs";
@@ -40,7 +40,7 @@ export default function Vote({ itemId }: VoteProps) {
   }, []);
 
   return (
-    <div>
+    <div className="text-gray-800">
       <button
         onClick={() => updateVotes(1)}
         disabled={hasVoted && hasVoted.value === 1}

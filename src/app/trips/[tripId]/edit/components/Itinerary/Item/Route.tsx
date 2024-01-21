@@ -6,7 +6,7 @@ import {
   faTrain,
   faBicycle,
   faPersonWalking,
-} from "@fortawesome/pro-regular-svg-icons";
+} from "@fortawesome/pro-solid-svg-icons";
 import { useMutation, useStorage } from "@/lib/liveblocks.config";
 import { useRoutes } from "@/hooks/useRoutes";
 import { metersToMiles } from "@/lib/util";
@@ -24,7 +24,9 @@ export default function Route({ itemId }: Props) {
 
   if (isLoading) {
     content = (
-      <div className="ml-[260px] border-l-2 border-dashed pl-4">Loading...</div>
+      <div className="ml-[260px] border-l-2 border-dashed pl-4 text-sm">
+        Loading...
+      </div>
     );
   }
 
@@ -48,7 +50,7 @@ export default function Route({ itemId }: Props) {
       .trimStart();
 
     content = (
-      <div className="ml-[260px] flex gap-4 border-l-2 border-dashed pl-4">
+      <div className="ml-[260px] flex gap-4 border-l-2 border-dashed pl-4 text-sm text-gray-800">
         <TravelMode itemId={itemId} />
         <div>{time}</div>
         <div>{distance} miles</div>

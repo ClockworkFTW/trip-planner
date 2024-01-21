@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/pro-regular-svg-icons";
+import { faClock } from "@fortawesome/pro-solid-svg-icons";
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 
 type Props = { itemId: string };
@@ -20,7 +20,7 @@ export default function Time({ itemId }: Props) {
   }, []);
 
   return (
-    <div className="rounded-md bg-gray-200 px-3 text-gray-600">
+    <div className="rounded-md bg-gray-200 px-3 text-sm text-gray-600">
       <label htmlFor={formId}>
         <FontAwesomeIcon icon={faClock} />
       </label>
