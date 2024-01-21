@@ -40,13 +40,13 @@ export default function Vote({ itemId }: VoteProps) {
   }, []);
 
   return (
-    <div className="text-gray-800">
+    <div className="text-gray-600">
       <button
         onClick={() => updateVotes(1)}
         disabled={hasVoted && hasVoted.value === 1}
         className={clsx(
-          "rounded-lg px-2 py-1",
-          hasVoted?.value === 1 && "bg-green-300",
+          "rounded-lg px-2 py-1 hover:bg-gray-200",
+          hasVoted?.value === 1 && "text-blue-600",
         )}
       >
         <FontAwesomeIcon icon={faThumbsUp} />
@@ -56,8 +56,8 @@ export default function Vote({ itemId }: VoteProps) {
         onClick={() => updateVotes(-1)}
         disabled={hasVoted && hasVoted.value === -1}
         className={clsx(
-          "rounded-lg px-2 py-1",
-          hasVoted?.value === -1 && "bg-red-300",
+          "rounded-lg px-2 py-1 hover:bg-gray-200",
+          hasVoted?.value === -1 && "text-blue-600",
         )}
       >
         <FontAwesomeIcon icon={faThumbsDown} />

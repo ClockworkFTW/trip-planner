@@ -13,9 +13,11 @@ export default function Website({ placeId }: Props) {
   const website = place?.websiteUri;
 
   return website ? (
-    <Link href={website} className="text-gray-600 hover:text-blue-600">
-      <FontAwesomeIcon icon={faGlobeAmericas} />
-      <span className="ml-2">{website}</span>
-    </Link>
+    <div className="text-gray-600 hover:text-blue-600">
+      <Link href={website} target="_blank">
+        <FontAwesomeIcon icon={faGlobeAmericas} />
+        <span className="ml-2">{website}</span>
+      </Link>
+    </div>
   ) : null;
 }

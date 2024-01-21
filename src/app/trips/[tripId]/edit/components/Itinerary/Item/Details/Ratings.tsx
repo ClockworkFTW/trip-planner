@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/pro-solid-svg-icons";
 import { usePlace } from "@/hooks/usePlace";
@@ -12,12 +13,17 @@ export default function Ratings({ placeId }: Props) {
   const rating = place?.rating;
   const ratingCount = place?.userRatingCount;
 
+  const query = place?.formattedAddress.split(" ").join("+");
+  const link = `https://www.google.com/search?q=${query}`;
+
   return rating && ratingCount ? (
     <div className="text-gray-600 hover:text-blue-600">
-      <FontAwesomeIcon icon={faStar} />
-      <span className="ml-2">
-        {rating} ({ratingCount.toLocaleString()})
-      </span>
+      <Link href={link} target="_blank">
+        <FontAwesomeIcon icon={faStar} />
+        <span className="ml-2">
+          {rating} ({ratingCount.toLocaleString()})
+        </span>
+      </Link>
     </div>
   ) : null;
 }

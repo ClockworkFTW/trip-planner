@@ -12,10 +12,14 @@ export default function Address({ placeId }: Props) {
 
   const address = place?.formattedAddress;
 
-  return address ? (
-    <Link href={""} className="text-gray-600 hover:text-blue-600">
-      <FontAwesomeIcon icon={faLocationDot} />
-      <span className="ml-2">{address}</span>
-    </Link>
+  const link = place?.googleMapsUri;
+
+  return address && link ? (
+    <div className="text-gray-600 hover:text-blue-600">
+      <Link href={link} target="_blank">
+        <FontAwesomeIcon icon={faLocationDot} />
+        <span className="ml-2">{address}</span>
+      </Link>
+    </div>
   ) : null;
 }

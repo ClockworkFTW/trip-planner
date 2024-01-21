@@ -14,7 +14,10 @@ export default function Delete({ itemId }: DeleteProps) {
   }, []);
 
   return (
-    <button className="text-gray-800" onClick={deleteItem}>
+    <button
+      className="rounded-lg px-2 py-1 text-gray-600 hover:bg-gray-200"
+      onClick={deleteItem}
+    >
       <FontAwesomeIcon icon={faTrashCan} />
     </button>
   );

@@ -31,7 +31,7 @@ export default function Flag({ placeId }: Props) {
     <div className="flex items-center gap-2">
       <span className="text-sm text-gray-800">{countryName}</span>
       <img
-        className="flex-none self-center rounded"
+        className="flex-none self-center"
         src={src}
         srcSet={srcSet}
         width={width}
