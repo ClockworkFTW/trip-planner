@@ -44,7 +44,13 @@ type Storage = {
   }>;
 };
 
-type UserMeta = {};
+type UserMeta = {
+  id: string;
+  info: {
+    name: string;
+    image: string;
+  };
+};
 
 type RoomEvent = {};
 

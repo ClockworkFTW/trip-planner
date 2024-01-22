@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { Photo, LocalizedText } from "@/types/places";
 
 const descriptionResponseSchema = z.object({
-  knowledgeGraph: z.object({ description: z.string() }).optional(),
+  knowledgeGraph: z.object({ description: z.string().optional() }).optional(),
 });
 
 const API_KEY = process.env.SERPER_API_KEY!;
@@ -26,7 +26,7 @@ export async function getDescription(query: string) {
     throw new Error("Serper description error");
   }
 
-  if (!parsedData.data.knowledgeGraph) return null;
+  if (!parsedData.data.knowledgeGraph?.description) return null;
 
   const description: LocalizedText = {
     text: parsedData.data.knowledgeGraph.description,

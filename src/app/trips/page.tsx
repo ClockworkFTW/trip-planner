@@ -1,5 +1,6 @@
 "use client";
 
+import SignOutButton from "@/components/SignOutButton";
 import { useTrips } from "@/hooks/useTrips";
 import Link from "next/link";
 
@@ -18,6 +19,7 @@ export default function TripList() {
           </li>
         ))}
       </ul>
+      <SignOutButton />
     </div>
   );
 }

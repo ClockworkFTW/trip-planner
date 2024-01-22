@@ -1,5 +1,6 @@
 "use client";
 
+import Members from "./components/Members";
 import Map from "./components/Map";
 import Title from "./components/Title";
 import Room from "./components/Room";
@@ -15,9 +16,12 @@ export default function EditTrip({ params }: Props) {
       <div className="grid h-screen grid-cols-[55%_45%]">
         <div className="relative overflow-y-scroll">
           <div className="sticky top-0 z-10 bg-white p-3">
-            <div className="mb-3 flex justify-between">
+            <div className="mb-3 flex items-center justify-between">
               <Title />
-              <Delete tripId={params.tripId} />
+              <div className="flex gap-2">
+                <Members />
+                <Delete tripId={params.tripId} />
+              </div>
             </div>
             <Search />
           </div>
