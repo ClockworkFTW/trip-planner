@@ -27,6 +27,7 @@
     "@vis.gl/react-google-maps": "^0.4.2",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
+    "flag-icons": "^7.1.0",
     "nanoid": "^5.0.4",
     "next": "14.0.4",
     "react": "^18",

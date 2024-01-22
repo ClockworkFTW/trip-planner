@@ -17,27 +17,12 @@ export default function Flag({ placeId }: Props) {
     }
   });
 
-  const width = 24;
-  const height = 18;
-
-  const baseUrl = "https://flagcdn.com";
-
-  const src = `${baseUrl}/${width}x${height}/${countryCode}.png`;
-  const src2x = `${baseUrl}/${width * 2}x${height * 2}/${countryCode}.png`;
-  const src3x = `${baseUrl}/${width * 2}x${height * 3}/${countryCode}.png`;
-  const srcSet = `${src2x} 2x, ${src3x} 3x`;
-
   return countryCode && countryName ? (
-    <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-800">{countryName}</span>
-      <img
-        className="flex-none self-center"
-        src={src}
-        srcSet={srcSet}
-        width={width}
-        height={height}
-        alt={countryName}
-      />
+    <div className="flex items-center gap-2 self-start rounded-md bg-gray-200 p-1">
+      <span className={`fi fi-${countryCode} fis rounded`}></span>
+      <span className="pr-1 text-xs font-bold text-gray-600">
+        {countryName}
+      </span>
     </div>
   ) : null;
 }
