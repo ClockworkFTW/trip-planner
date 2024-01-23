@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { APIProvider as MapProvider } from "@vis.gl/react-google-maps";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -14,13 +13,9 @@ export function Providers(props: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryStreamedHydration>
-        <ClerkProvider>
-          <MapProvider apiKey={GOOGLE_MAPS_API_KEY}>
-            {props.children}
-          </MapProvider>
-        </ClerkProvider>
-      </ReactQueryStreamedHydration>
+      <ClerkProvider>
+        <MapProvider apiKey={GOOGLE_MAPS_API_KEY}>{props.children}</MapProvider>
+      </ClerkProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
