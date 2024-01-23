@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import { Element, Events } from "react-scroll";
 import { sleep } from "@/util/helpers";
+import Photos from "./Photos";
 
 import {
   useAddPlaceToItinerary,
@@ -75,11 +76,12 @@ function Recommendation({ place, order, isScrolling }: Props) {
       <div
         ref={ref}
         onClick={() => setActiveRecommendedPlace(place.id)}
-        className="p-2"
+        className="p-4"
       >
         <div>{order}</div>
         <div className="font-bold">{place.displayName.text}</div>
         <div>{place.editorialSummary?.text}</div>
+        <Photos photos={place.photos} />
         <button onClick={() => handleAddOrRemovePlace(place.id)}>
           {isPlaceInItinerary ? "Added" : "Add"}
         </button>
