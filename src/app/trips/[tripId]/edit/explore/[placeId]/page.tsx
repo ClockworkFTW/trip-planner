@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRecommendations } from "@/hooks/useRecommendations";
 import Recommendations from "./components/Recommendations";
 import Map from "./components/Map";
@@ -8,6 +9,8 @@ type Props = { params: { placeId: string } };
 
 export default function ExplorePage({ params: { placeId } }: Props) {
   const { data, isLoading, error } = useRecommendations(placeId, "test");
+
+  const router = useRouter();
 
   let content: JSX.Element | null = null;
 
@@ -19,6 +22,7 @@ export default function ExplorePage({ params: { placeId } }: Props) {
     content = (
       <div className="grid h-screen grid-cols-[55%_45%]">
         <div className="overflow-y-scroll" id="scroll">
+          <button onClick={() => router.back()}>Back</button>
           <Recommendations places={data.places} />
         </div>
         <div className="h-full w-full">
