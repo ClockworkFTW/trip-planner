@@ -21,6 +21,7 @@ export default function Photos({ photos }: { photos: Photo[] }) {
 
           return (
             <img
+              key={url}
               src={url}
               className="h-[120px] flex-none overflow-hidden rounded-md object-cover"
             />
