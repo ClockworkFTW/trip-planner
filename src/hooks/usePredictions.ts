@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { Prediction } from "@/types/predictions";
 
 async function getPredictions(input: string, types: string) {
-  const url = `/api/places?input=${input}&types=${types}`;
+  const url = `/api/places/predictions?input=${input}&types=${types}`;
   const response = await fetch(url, { method: "GET" });
   const { predictions }: { predictions: Prediction[] } = await response.json();
   return predictions;

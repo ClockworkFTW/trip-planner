@@ -3,14 +3,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
-import { usePlace } from "@/hooks/usePlace";
+import { useGetPlace } from "@/hooks/usePlaces";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
 type Props = { placeId: string };
 
 export default function Photo({ placeId }: Props) {
-  const { data: place } = usePlace(placeId);
+  const { data: place } = useGetPlace(placeId);
 
   const photos = place?.photos.map((photo) => {
     if (photo.name.startsWith("places")) {

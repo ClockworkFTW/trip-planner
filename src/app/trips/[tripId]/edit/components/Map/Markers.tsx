@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { useStorage } from "@/lib/liveblocks.config";
 import { useMap } from "@vis.gl/react-google-maps";
 import { AdvancedMarker } from "@vis.gl/react-google-maps";
-import { usePlace } from "@/hooks/usePlace";
-import { useItem } from "@/hooks/useItem";
-import { useSelf } from "@/lib/liveblocks.config";
+import { useGetPlace, useActiveItineraryPlace } from "@/hooks/usePlaces";
+import { useItinerary } from "@/hooks/useItinerary";
 import clsx from "clsx";
 
 export default function Markers() {
-  const itinerary = useStorage(({ trip }) => trip.itinerary);
+  const itinerary = useItinerary();
 
   return itinerary.map(({ itemId, placeId }, index) => (
     <MarkerWrapper key={itemId} placeId={placeId} order={index + 1} />
@@ -23,7 +21,7 @@ type MarkerWrapperProps = {
 };
 
 function MarkerWrapper({ placeId, order }: MarkerWrapperProps) {
-  const { data: place } = usePlace(placeId);
+  const { data: place } = useGetPlace(placeId);
 
   if (!place) return null;
 
@@ -47,22 +45,20 @@ type MarkerContentProps = {
 
 function MarkerContent({ placeId, position, order }: MarkerContentProps) {
   const map = useMap();
-  const user = useSelf();
 
-  const activeItem = useItem(user.presence.activeItemId);
-  const isActive = activeItem?.placeId === placeId;
+  const isActiveItineraryPlace = useActiveItineraryPlace(placeId);
 
   useEffect(() => {
-    if (map && isActive) {
+    if (map && isActiveItineraryPlace) {
       map.panTo(position);
     }
-  }, [map, isActive]);
+  }, [map, isActiveItineraryPlace]);
 
   return (
     <div
       className={clsx(
         "relative h-[30px] w-[30px] rounded-full bg-red-500",
-        isActive && "scale-150",
+        isActiveItineraryPlace && "scale-150",
       )}
     >
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-base font-bold text-white">

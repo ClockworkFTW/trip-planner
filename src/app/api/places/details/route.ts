@@ -1,12 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPlaceDetails } from "@/lib/google";
-import * as cache from "@/lib/cache";
 import { getDescription, getPhotos } from "@/lib/serper";
-import { getErrorMessage } from "@/lib/util";
+import { getErrorMessage, getSearchParams } from "@/util/api";
+import * as cache from "@/lib/cache";
+import { z } from "zod";
+
+const paramsSchema = z.object({
+  placeId: z.string(),
+});
 
 export async function GET(request: NextRequest) {
-  // TODO: find a better way to do this
-  const placeId = request.nextUrl.pathname.split("/")[3];
+  const params = getSearchParams(request);
+
+  const parsedParams = paramsSchema.safeParse(params);
+
+  if (!parsedParams.success) {
+    return NextResponse.json({ message: "Invalid params" }, { status: 400 });
+  }
+
+  const { placeId } = parsedParams.data;
 
   try {
     const place = await getPlaceDetails(placeId);

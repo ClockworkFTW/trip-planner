@@ -1,6 +1,7 @@
 "use client";
 
-import { useStorage, useMutation } from "@/lib/liveblocks.config";
+import { useItinerary } from "@/hooks/useItinerary";
+import { useMutation } from "@/lib/liveblocks.config";
 import SortableItem from "./Item";
 
 import {
@@ -25,7 +26,7 @@ import {
 import type { DragEndEvent } from "@dnd-kit/core";
 
 export default function Itinerary() {
-  const itinerary = useStorage(({ trip }) => trip.itinerary);
+  const itinerary = useItinerary();
 
   const itemIds = itinerary.map(({ itemId }) => itemId);
 

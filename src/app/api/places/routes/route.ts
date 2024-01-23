@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRoutes } from "@/lib/google";
-import { getErrorMessage, getSearchParams } from "@/lib/util";
+import { getErrorMessage, getSearchParams } from "@/util/api";
 import { z } from "zod";
 
 const paramsSchema = z.object({

@@ -9,4 +9,6 @@ export type Photo = z.infer<typeof schema.photo>;
 
 export type Location = z.infer<typeof schema.location>;
 
+export type Viewport = z.infer<typeof schema.viewport>;
+
 export type Bounds = { sw: Location; ne: Location };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useDeleteTrip } from "@/hooks/useDeleteTrip";
+import { useDeleteTrip } from "@/hooks/useTrips";
 
 export default function Delete({ tripId }: { tripId: string }) {
   const { mutate: deleteTrip, isPending } = useDeleteTrip();

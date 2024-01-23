@@ -51,3 +51,5 @@ export const place = z.object({
   websiteUri: z.string().optional(),
   internationalPhoneNumber: z.string().optional(),
 });
+
+export const places = z.object({ places: z.array(place) });

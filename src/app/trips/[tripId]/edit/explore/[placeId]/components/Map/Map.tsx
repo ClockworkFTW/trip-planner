@@ -2,15 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Map, useMapsLibrary } from "@vis.gl/react-google-maps";
-import { useStorage } from "@/lib/liveblocks.config";
-import Bounds from "./Bounds";
 import Markers from "./Markers";
-import Routes from "./Routes";
+import type { Place, Bounds } from "@/types/places";
 
-export default function MapContainer() {
+type Props = { places: Place[]; bounds: Bounds };
+
+export default function MapContainer({ places, bounds }: Props) {
   const coreLib = useMapsLibrary("core");
-
-  const bounds = useStorage(({ trip }) => trip.bounds);
 
   const [initialBounds, setInitialBounds] =
     useState<google.maps.LatLngBounds>();
@@ -29,10 +27,8 @@ export default function MapContainer() {
   }, [coreLib]);
 
   return initialBounds ? (
-    <Map initialBounds={initialBounds} mapId="itinerary">
-      <Bounds />
-      <Markers />
-      <Routes />
+    <Map initialBounds={initialBounds} mapId="explore">
+      <Markers places={places} />
     </Map>
   ) : null;
 }

@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/pro-solid-svg-icons";
-import { usePlace } from "@/hooks/usePlace";
+import { useGetPlace } from "@/hooks/usePlaces";
 
 type Props = { placeId: string };
 
 export default function Ratings({ placeId }: Props) {
-  const { data: place } = usePlace(placeId);
+  const { data: place } = useGetPlace(placeId);
 
   const rating = place?.rating;
   const ratingCount = place?.userRatingCount;

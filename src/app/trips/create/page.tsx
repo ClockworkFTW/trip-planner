@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCreateTrip } from "@/hooks/useCreateTrip";
+import { useCreateTrip } from "@/hooks/useTrips";
 import Calendar from "./components/Calendar";
 import Search from "./components/Search";
 import Places from "./components/Places";
@@ -20,11 +20,7 @@ export default function CreateTrip() {
 
   function handleCreateTrip() {
     if (placeIds.length && startDate && endDate) {
-      createTrip({
-        placeIds,
-        startDate,
-        endDate,
-      });
+      createTrip({ placeIds, startDate, endDate });
     }
   }
 

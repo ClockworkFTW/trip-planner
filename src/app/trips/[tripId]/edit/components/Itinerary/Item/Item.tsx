@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { useUpdateMyPresence } from "@/lib/liveblocks.config";
-import { usePlace } from "@/hooks/usePlace";
+import { useGetPlace } from "@/hooks/usePlaces";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Order from "./Order";
@@ -36,7 +36,7 @@ const MemoizedItem = memo(Item);
 // ? Item always renders three times on mount
 
 function Item({ itemId, placeId, order }: ItemProps) {
-  const { data: place, isLoading } = usePlace(placeId);
+  const { data: place, isLoading } = useGetPlace(placeId);
 
   const updateMyPresence = useUpdateMyPresence();
 

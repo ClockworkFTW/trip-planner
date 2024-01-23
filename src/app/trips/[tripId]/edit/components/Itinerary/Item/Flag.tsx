@@ -1,11 +1,11 @@
 "use client";
 
-import { usePlace } from "@/hooks/usePlace";
+import { useGetPlace } from "@/hooks/usePlaces";
 
 type Props = { placeId: string };
 
 export default function Flag({ placeId }: Props) {
-  const { data: place } = usePlace(placeId);
+  const { data: place } = useGetPlace(placeId);
 
   let countryCode: string | null = null;
   let countryName: string | null = null;

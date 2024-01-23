@@ -1,17 +1,19 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useMutation } from "@/lib/liveblocks.config";
+import { useItem } from "@/hooks/useItinerary";
+import { useRoutes } from "@/hooks/useRoutes";
+import { metersToMiles } from "@/util/map";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+
 import {
   faCar,
   faTrain,
   faBicycle,
   faPersonWalking,
 } from "@fortawesome/pro-solid-svg-icons";
-import { useMutation, useStorage } from "@/lib/liveblocks.config";
-import { useRoutes } from "@/hooks/useRoutes";
-import { metersToMiles } from "@/lib/util";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 
 dayjs.extend(duration);
 
@@ -62,10 +64,7 @@ export default function Route({ itemId }: Props) {
 }
 
 function TravelMode({ itemId }: { itemId: string }) {
-  const travelMode = useStorage(
-    ({ trip }) =>
-      trip.itinerary.find((item) => item.itemId === itemId)?.travelMode,
-  );
+  const item = useItem(itemId);
 
   // TODO: this is a temporary toggle, need to update for production
   const updateTravelMode = useMutation(({ storage }) => {
@@ -92,7 +91,7 @@ function TravelMode({ itemId }: { itemId: string }) {
 
   let content: JSX.Element | null = null;
 
-  switch (travelMode) {
+  switch (item?.travelMode) {
     case "DRIVE":
       content = <FontAwesomeIcon icon={faCar} />;
       break;

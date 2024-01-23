@@ -9,7 +9,7 @@ type GetRoutesArgs = {
 };
 
 async function getRoutes({ placeIdA, placeIdB, travelMode }: GetRoutesArgs) {
-  const url = `/api/routes?placeIdA=${placeIdA}&placeIdB=${placeIdB}&travelMode=${travelMode}`;
+  const url = `/api/places/routes?placeIdA=${placeIdA}&placeIdB=${placeIdB}&travelMode=${travelMode}`;
   const response = await fetch(url, { method: "GET" });
   const { routes }: { routes: Route[] } = await response.json();
   return routes;

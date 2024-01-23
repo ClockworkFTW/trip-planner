@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useMutation } from "@/lib/liveblocks.config";
 import { useMap } from "@vis.gl/react-google-maps";
 import { LiveObject } from "@liveblocks/client";
-import { getBounds } from "@/util/map";
+import { getBounds } from "@/lib/util";
 import { useGetPlaces } from "@/hooks/usePlaces";
 import type { Place, Bounds } from "@/types/places";
 

@@ -3,13 +3,13 @@
 import { ClientSideSuspense } from "@liveblocks/react";
 import { RoomProvider } from "@/lib/liveblocks.config";
 
-type Props = { id: string; children: React.ReactNode };
+type Props = { children: React.ReactNode; params: { tripId: string } };
 
-export default function Room({ id, children }: Props) {
+export default function TripEditorLayout({ params, children }: Props) {
   const initialPresence = { activeItemId: null };
 
   return (
-    <RoomProvider id={id} initialPresence={initialPresence}>
+    <RoomProvider id={params.tripId} initialPresence={initialPresence}>
       <ClientSideSuspense fallback={<div>Loading…</div>}>
         {() => children}
       </ClientSideSuspense>
