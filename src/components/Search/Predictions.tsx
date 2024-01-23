@@ -2,7 +2,7 @@
 
 import Highlight from "./Highlight";
 import Type from "./Type";
-import type { Prediction } from "@/lib/types";
+import type { Prediction } from "@/types/predictions";
 
 type Props = {
   predictions: Prediction[];
