@@ -1,5 +1,3 @@
-"use client";
-
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 
 type NoteProps = { itemId: string };

@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { useMap } from "@vis.gl/react-google-maps";
 import { AdvancedMarker } from "@vis.gl/react-google-maps";

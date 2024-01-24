@@ -1,5 +1,3 @@
-"use client";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/pro-solid-svg-icons";
 import { useMutation } from "@/lib/liveblocks.config";

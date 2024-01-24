@@ -1,5 +1,3 @@
-"use client";
-
 import { useSelf } from "@/lib/liveblocks.config";
 import Address from "./Address";
 import Ratings from "./Ratings";

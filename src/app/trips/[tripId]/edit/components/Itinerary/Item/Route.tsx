@@ -1,5 +1,3 @@
-"use client";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@/lib/liveblocks.config";
 import { useItem } from "@/hooks/useItinerary";

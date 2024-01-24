@@ -1,5 +1,3 @@
-"use client";
-
 import { useStorage, useMutation } from "@/lib/liveblocks.config";
 
 export default function Title() {

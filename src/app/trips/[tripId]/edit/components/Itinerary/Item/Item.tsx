@@ -1,5 +1,3 @@
-"use client";
-
 import { memo } from "react";
 import { useUpdateMyPresence } from "@/lib/liveblocks.config";
 import { useGetPlace } from "@/hooks/usePlaces";

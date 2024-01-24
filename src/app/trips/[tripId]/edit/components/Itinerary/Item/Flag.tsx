@@ -1,5 +1,3 @@
-"use client";
-
 import { useGetPlace } from "@/hooks/usePlaces";
 
 type Props = { placeId: string };

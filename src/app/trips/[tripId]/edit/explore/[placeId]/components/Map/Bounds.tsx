@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { useMutation } from "@/lib/liveblocks.config";
 import { useMap } from "@vis.gl/react-google-maps";

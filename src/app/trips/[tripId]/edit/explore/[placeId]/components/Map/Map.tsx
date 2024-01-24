@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { Map, useMapsLibrary } from "@vis.gl/react-google-maps";
 import Markers from "./Markers";

@@ -1,5 +1,3 @@
-"use client";
-
 type Props = { order: number };
 
 export default function Order({ order }: Props) {

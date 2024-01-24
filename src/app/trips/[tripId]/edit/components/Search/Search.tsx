@@ -1,5 +1,3 @@
-"use client";
-
 import { useAddPlaceToItinerary } from "@/hooks/usePlaces";
 import Search from "@/components/Search";
 

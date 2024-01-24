@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import SignOutButton from "@/components/SignOutButton";
 import { useGetTrips } from "@/hooks/useTrips";
 import Link from "next/link";
@@ -31,5 +32,5 @@ export default function TripList() {
     );
   }
 
-  return content;
+  return <Suspense>{content}</Suspense>;
 }

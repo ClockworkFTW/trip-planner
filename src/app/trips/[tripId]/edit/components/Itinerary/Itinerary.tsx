@@ -1,5 +1,3 @@
-"use client";
-
 import { useItinerary } from "@/hooks/useItinerary";
 import { useMutation } from "@/lib/liveblocks.config";
 import SortableItem from "./Item";

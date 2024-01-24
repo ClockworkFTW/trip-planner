@@ -1,5 +1,3 @@
-"use client";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar } from "@fortawesome/pro-solid-svg-icons";
 import { useStorage, useMutation } from "@/lib/liveblocks.config";

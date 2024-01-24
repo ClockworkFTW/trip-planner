@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef, useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import { Element, Events } from "react-scroll";

@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useStorage } from "@/lib/liveblocks.config";

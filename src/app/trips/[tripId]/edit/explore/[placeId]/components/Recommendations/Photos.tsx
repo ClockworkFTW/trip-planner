@@ -1,5 +1,3 @@
-"use client";
-
 import type { Photo } from "@/types/places";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
