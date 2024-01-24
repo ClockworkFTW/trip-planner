@@ -1,9 +1,7 @@
-import { Suspense } from "react";
-
 export default function Home() {
   return (
-    <Suspense>
+    <div>
       <h1>Home</h1>
-    </Suspense>
+    </div>
   );
 }

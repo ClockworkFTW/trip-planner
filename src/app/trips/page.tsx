@@ -1,6 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
 import SignOutButton from "@/components/SignOutButton";
 import { useGetTrips } from "@/hooks/useTrips";
 import Link from "next/link";
@@ -19,7 +18,6 @@ export default function TripList() {
       <div>
         <h1>Trip List</h1>
         <Link href="/trips/create">Create Trip</Link>
-        {isLoading && <p>Loading Trips...</p>}
         <ul>
           {trips?.map((trip) => (
             <li key={trip.id}>
@@ -32,5 +30,5 @@ export default function TripList() {
     );
   }
 
-  return <Suspense>{content}</Suspense>;
+  return content;
 }
