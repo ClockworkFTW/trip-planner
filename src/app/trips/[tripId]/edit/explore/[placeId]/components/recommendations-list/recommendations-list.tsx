@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import { Element, Events } from "react-scroll";
-import { sleep } from "@/util/helpers";
+import { sleep } from "@/utils/helpers";
 import PhotoGallery from "./photo-gallery";
 
 import {

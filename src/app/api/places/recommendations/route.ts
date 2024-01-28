@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPlaceDetails, getPlaceRecommendations } from "@/lib/google";
-import { getErrorMessage, getSearchParams } from "@/util/api";
-import { getBounds } from "@/util/map";
+import { getErrorMessage, getSearchParams } from "@/utils/api";
+import { getBounds } from "@/utils/map";
 import { z } from "zod";
 
 const paramsSchema = z.object({

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPlaceDetails } from "@/lib/google";
 import { getDescription, getPhotos } from "@/lib/serper";
-import { getErrorMessage, getSearchParams } from "@/util/api";
+import { getErrorMessage, getSearchParams } from "@/utils/api";
 import * as cache from "@/lib/cache";
 import { z } from "zod";
 

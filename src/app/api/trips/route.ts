@@ -4,7 +4,7 @@ import { createRoom, initializeStorage, getStorage } from "@/lib/liveblocks";
 import prisma from "@/lib/db";
 import { z } from "zod";
 import { getPlaceDetails } from "@/lib/google";
-import { getBounds } from "@/util/map";
+import { getBounds } from "@/utils/map";
 import type { Bounds } from "@/types/places";
 
 export async function GET() {

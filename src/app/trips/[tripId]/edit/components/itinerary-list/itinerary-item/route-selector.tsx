@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@/lib/liveblocks.config";
 import { useItem } from "@/hooks/useItinerary";
 import { useRoutes } from "@/hooks/useRoutes";
-import { metersToMiles } from "@/util/map";
+import { metersToMiles } from "@/utils/map";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
