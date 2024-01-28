@@ -4,22 +4,30 @@ import { Suspense, useState } from "react";
 import { useCreateTrip } from "@/hooks/useTrips";
 import Calendar from "./components/Calendar";
 import Search from "./components/Search";
-import Places from "./components/Places";
+import Destinations from "./components/Destinations";
+import type { Prediction } from "@/types/predictions";
 
 export default function CreateTrip() {
   const { mutate: createTrip, isPending } = useCreateTrip();
 
-  const [placeIds, setPlaceIds] = useState<string[]>([]);
+  const [destinations, setDestinations] = useState<Prediction[]>([]);
 
-  function handleAddPlace(placeId: string) {
-    setPlaceIds((placeIds) => [...placeIds, placeId]);
+  function addDestination(prediction: Prediction) {
+    setDestinations((destinations) => [...destinations, prediction]);
+  }
+
+  function removeDestination(placeId: string) {
+    setDestinations((destinations) =>
+      destinations.filter((destination) => destination.place_id !== placeId),
+    );
   }
 
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
 
   function handleCreateTrip() {
-    if (placeIds.length && startDate && endDate) {
+    if (destinations.length && startDate && endDate) {
+      const placeIds = destinations.map((destination) => destination.place_id);
       createTrip({ placeIds, startDate, endDate });
     }
   }
@@ -27,14 +35,17 @@ export default function CreateTrip() {
   return (
     <Suspense>
       <div>
+        <Destinations
+          destinations={destinations}
+          removeDestination={removeDestination}
+        />
+        <Search addDestination={addDestination} />
         <Calendar
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}
           setEndDate={setEndDate}
         />
-        <Search onClick={handleAddPlace} />
-        <Places placeIds={placeIds} />
         <button onClick={handleCreateTrip}>
           {isPending ? "Creating Trip..." : "Create Trip"}
         </button>

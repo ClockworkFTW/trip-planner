@@ -1,9 +1,14 @@
 "use client";
 
 import Search from "@/components/Search";
+import type { Prediction } from "@/types/predictions";
 
-type Props = { onClick: (name: string) => void };
+type Props = { addDestination: (prediction: Prediction) => void };
 
-export default function ItemSearch({ onClick }: Props) {
-  return <Search types="(regions)" onClick={onClick} />;
+export default function ItemSearch({ addDestination }: Props) {
+  function handleClick(prediction: Prediction) {
+    addDestination(prediction);
+  }
+
+  return <Search types="(regions)" onClick={handleClick} />;
 }

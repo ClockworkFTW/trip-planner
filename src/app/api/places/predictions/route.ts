@@ -26,7 +26,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: "No places found" }, { status: 400 });
     }
 
-    return NextResponse.json({ predictions }, { status: 200 });
+    const predictionsWithIds = predictions.filter(
+      (prediction) => prediction.place_id,
+    );
+
+    return NextResponse.json(
+      { predictions: predictionsWithIds },
+      { status: 200 },
+    );
   } catch (error) {
     const message = getErrorMessage(error);
     return NextResponse.json({ message }, { status: 400 });

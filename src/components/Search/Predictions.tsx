@@ -6,7 +6,7 @@ import type { Prediction } from "@/types/predictions";
 
 type Props = {
   predictions: Prediction[];
-  onClick: (placeId: string) => void;
+  onClick: (prediction: Prediction) => void;
 };
 
 export default function Predictions({ predictions, onClick }: Props) {
@@ -27,7 +27,7 @@ export default function Predictions({ predictions, onClick }: Props) {
         return (
           <li
             key={place_id}
-            onClick={() => onClick(place_id)}
+            onClick={() => onClick(prediction)}
             className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-gray-100"
           >
             <div>

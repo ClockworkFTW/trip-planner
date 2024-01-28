@@ -60,8 +60,19 @@ export async function POST(request: NextRequest) {
     placeIds.map((placeId) => getPlaceDetails(placeId)),
   );
 
-  const title =
-    "Trip to " + places.map((place) => place.displayName.text).join(" and ");
+  const title = places.reduce((title, place, index) => {
+    let spacer = "";
+
+    if (index !== 0) {
+      if (index + 1 === places.length) {
+        spacer = " and ";
+      } else {
+        spacer = ", ";
+      }
+    }
+
+    return title + spacer + place.displayName.text;
+  }, "Trip to ");
 
   let bounds: Bounds;
 

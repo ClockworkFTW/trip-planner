@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { usePredictions } from "@/hooks/usePredictions";
 import Predictions from "./Predictions";
+import type { Prediction } from "@/types/predictions";
 
-type SearchProps = { types: string; onClick: (placeId: string) => void };
+type SearchProps = { types: string; onClick: (prediction: Prediction) => void };
 
 export default function Search({ types, onClick }: SearchProps) {
   const [input, setInput] = useState<string>("");
@@ -17,8 +18,8 @@ export default function Search({ types, onClick }: SearchProps) {
     reset: !input,
   });
 
-  function handleClick(placeId: string) {
-    onClick(placeId);
+  function handleClick(prediction: Prediction) {
+    onClick(prediction);
     setInput("");
   }
 
