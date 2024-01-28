@@ -17,7 +17,11 @@ export default function PredictionsList(props: PredictionsListProps) {
   return (
     <ul className="mt-1 rounded border border-solid border-gray-300">
       {predictions.map((prediction) => (
-        <PredictionItem prediction={prediction} onClick={onClick} />
+        <PredictionItem
+          key={prediction.place_id}
+          prediction={prediction}
+          onClick={onClick}
+        />
       ))}
     </ul>
   );
@@ -46,7 +50,6 @@ function PredictionItem(props: PredictionItemProps) {
 
   return (
     <li
-      key={prediction.place_id}
       onClick={handleClick}
       className="flex items-center justify-between p-2 hover:cursor-pointer hover:bg-gray-100"
     >
