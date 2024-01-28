@@ -2,9 +2,9 @@
 
 import { Suspense, useState } from "react";
 import { useCreateTrip } from "@/hooks/useTrips";
-import Calendar from "./components/Calendar";
-import Search from "./components/Search";
-import Destinations from "./components/Destinations";
+import Calendar from "./components/calendar";
+import Search from "./components/search";
+import Destinations from "./components/destinations";
 import type { Prediction } from "@/types/predictions";
 
 export default function CreateTrip() {

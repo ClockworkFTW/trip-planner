@@ -1,6 +1,6 @@
 "use client";
 
-import SignOutButton from "@/components/SignOutButton";
+import SignOutButton from "@/components/ui/sign-out-button";
 import { useGetTrips } from "@/hooks/useTrips";
 import Link from "next/link";
 

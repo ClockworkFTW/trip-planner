@@ -1,11 +1,11 @@
 "use client";
 
-import Members from "./components/Members";
-import Map from "./components/Map";
-import Title from "./components/Title";
-import Search from "./components/Search";
-import Itinerary from "./components/Itinerary";
-import Delete from "./components/Delete";
+import TripMembers from "./components/trip-members";
+import ItineraryMap from "./components/itinerary-map";
+import TitleInput from "./components/title-input";
+import Search from "./components/search";
+import ItineraryList from "./components/itinerary-list";
+import DeleteTripButton from "./components/delete-trip-button";
 
 export default function EditTripPage() {
   return (
@@ -13,18 +13,18 @@ export default function EditTripPage() {
       <div className="relative overflow-y-scroll">
         <div className="sticky top-0 z-10 bg-white p-3">
           <div className="mb-3 flex items-center justify-between">
-            <Title />
+            <TitleInput />
             <div className="flex gap-2">
-              <Members />
-              <Delete />
+              <TripMembers />
+              <DeleteTripButton />
             </div>
           </div>
           <Search />
         </div>
-        <Itinerary />
+        <ItineraryList />
       </div>
       <div className="h-full w-full">
-        <Map />
+        <ItineraryMap />
       </div>
     </div>
   );

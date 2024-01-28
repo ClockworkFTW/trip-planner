@@ -1,18 +1,12 @@
-"use client";
+import Room from "./room";
 
-import { ClientSideSuspense } from "@liveblocks/react";
-import { RoomProvider } from "@/lib/liveblocks.config";
+type TripEditorLayoutProps = {
+  children: React.ReactNode;
+  params: { tripId: string };
+};
 
-type Props = { children: React.ReactNode; params: { tripId: string } };
+export default function TripEditorLayout(props: TripEditorLayoutProps) {
+  const { params, children } = props;
 
-export default function TripEditorLayout({ params, children }: Props) {
-  const initialPresence = { activeItemId: null };
-
-  return (
-    <RoomProvider id={params.tripId} initialPresence={initialPresence}>
-      <ClientSideSuspense fallback={<div>Loading…</div>}>
-        {() => children}
-      </ClientSideSuspense>
-    </RoomProvider>
-  );
+  return <Room id={params.tripId}>{children}</Room>;
 }

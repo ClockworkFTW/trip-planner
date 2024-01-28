@@ -2,12 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import { useRecommendations } from "@/hooks/useRecommendations";
-import Recommendations from "./components/Recommendations";
-import Map from "./components/Map";
+import RecommendationsList from "./components/recommendations-list";
+import ExploreMap from "./components/explore-map";
 
-type Props = { params: { placeId: string } };
+type ExplorePageProps = { params: { placeId: string } };
 
-export default function ExplorePage({ params: { placeId } }: Props) {
+export default function ExplorePage(props: ExplorePageProps) {
+  const {
+    params: { placeId },
+  } = props;
+
   const { data, isLoading, error } = useRecommendations(placeId, "test");
 
   const router = useRouter();
@@ -23,10 +27,10 @@ export default function ExplorePage({ params: { placeId } }: Props) {
       <div className="grid h-screen grid-cols-[55%_45%]">
         <div className="overflow-y-scroll" id="scroll">
           <button onClick={() => router.back()}>Back</button>
-          <Recommendations places={data.places} />
+          <RecommendationsList places={data.places} />
         </div>
         <div className="h-full w-full">
-          <Map places={data.places} bounds={data.bounds} />
+          <ExploreMap places={data.places} bounds={data.bounds} />
         </div>
       </div>
     );
